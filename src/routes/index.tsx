@@ -4,6 +4,7 @@ import {
   Route,
   BrowserRouter as Router,
 } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 import {
 	UnauthedRoute,
@@ -11,14 +12,15 @@ import {
 	PublicRoute
 } from "./routes"
 
-
 import NotFound from "./../pages/not-found"
 import AuthedTemplate from "./components/AuthedComponent"
 import UnauthedTemplate from "./components/UnauthedComponent"
 import PublicTemplate from "./components/PublicComponent"
 
+import { RootState } from "./../config/root-reducer";
+
 const Routes = () => {
-	const token = "dummy-token"
+	const { token } = useSelector((state: RootState) => state.auth)
 
 	return (
 		<Router>
