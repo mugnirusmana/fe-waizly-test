@@ -107,6 +107,7 @@ const Login = () => {
 					value={username.value}
 					onChange={(e: any) => setUsername(e)}
 					icon={(<IoPerson />)}
+					onClearText={(e: any) => setUsername(e)}
 				/>
 
 				<Input
@@ -125,6 +126,7 @@ const Login = () => {
 					onChange={(e: any) => setPassword(e)}
 					icon={showPassword ? (<IoEye />) : (<IoEyeOff />)}
 					onClickIcon={() => setShowPassword(!showPassword)}
+					onClearText={(e: any) => setPassword(e)}
 				/>
 
 				<div className="w-full flex flex-row">

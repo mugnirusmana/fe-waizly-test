@@ -1,3 +1,5 @@
+import { IoClose } from "@react-icons/all-files/io5/IoClose"
+
 interface Type {
   type?: string
   name?: string
@@ -22,6 +24,7 @@ interface Type {
   onChange?: Function
   icon?: any
   onClickIcon?: Function
+  onClearText?: Function
 }
 
 const Input = ({
@@ -34,7 +37,8 @@ const Input = ({
   value,
   onChange,
   icon,
-  onClickIcon
+  onClickIcon,
+  onClearText
 }: Type ) => {
 
   const setValidate = (val: string) => {
@@ -86,6 +90,23 @@ const Input = ({
     return {}
   }
 
+  const renderClearText = () => {
+    if (value) {
+      return (
+        <div
+          className={`w-fit pr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} cursor-pointer`}
+          onClick={() => onClearText ? onClearText({
+            name: name??null,
+            isError: false,
+            errorMessage: '',
+            value: ''
+          }) : {}}
+        ><IoClose /></div>
+      )
+    }
+    return null
+  }
+
   return (
     <div className="w-full flex flex-col gap-1">
       <div className={`w-full flex flex-row items-center rounded-full border duration-300 ${isError ? 'border-red-300' : 'border-white'}`}>
@@ -96,6 +117,7 @@ const Input = ({
           onChange={(e: any) => setValidate(e?.target?.value)}
           value={value??""}
         />
+        {renderClearText()}
         <div
           className={`w-fit pr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} ${onClickIcon ? 'cursor-pointer' : 'cursor-default'}`}
           onClick={() => onClickIcon ? onClickIcon() : {}}
