@@ -144,7 +144,7 @@ const Login = () => {
 				<Button
 					label={"Sign In"}
 					isLoading={auth?.isLoading}
-					disabled={auth?.isLoading}
+					disabled={auth?.isLoading || username?.isError || password?.isError}
 					onClick={() => {
 						let params = {
 							username: username?.value,

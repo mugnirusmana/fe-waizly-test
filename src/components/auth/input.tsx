@@ -48,9 +48,10 @@ const Input = ({
       }
 
       if (validate) {
+        let msg = null
         if(validate?.fields?.regex) {
           if (!validate?.fields?.regex.test(val)) {
-            let msg = validate?.customMessage?.regex??`${fieldName} format is invalid`
+            msg = validate?.customMessage?.regex??`${fieldName} format is invalid`
             res.isError = true
             res.errorMessage = msg
           }
@@ -58,7 +59,7 @@ const Input = ({
 
         if(validate?.fields?.max) {
           if (val?.length > validate?.fields?.max) {
-            let msg = validate?.customMessage?.max??`${fieldName} maximum length ${validate?.fields?.max} character${val?.length > 1 ? 's' :''}`
+            msg = validate?.customMessage?.max??`${fieldName} maximum length ${validate?.fields?.max} character${val?.length > 1 ? 's' : ''}`
             res.isError = true
             res.errorMessage = msg
           }
@@ -66,7 +67,7 @@ const Input = ({
 
         if(validate?.fields?.min) {
           if (val?.length < validate?.fields?.min) {
-            let msg = validate?.customMessage?.min??`${fieldName} minimum length ${validate?.fields?.min} character${val?.length > 1 ? 's' :''}`
+            msg = validate?.customMessage?.min??`${fieldName} minimum length ${validate?.fields?.min} character${val?.length > 1 ? 's' : ''}`
             res.isError = true
             res.errorMessage = msg
           }
@@ -74,7 +75,7 @@ const Input = ({
 
         if(validate?.fields?.required) {
           if (!val || val === "" || val === '') {
-            let msg = validate?.customMessage?.required??`${fieldName} is required`
+            msg = validate?.customMessage?.required??`${fieldName} is required`
             res.isError = true
             res.errorMessage = msg
           }
