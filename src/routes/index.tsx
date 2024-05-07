@@ -17,20 +17,20 @@ import AuthedTemplate from "./components/AuthedComponent"
 import UnauthedTemplate from "./components/UnauthedComponent"
 import PublicTemplate from "./components/PublicComponent"
 
-import { RootState } from "./../config/root-reducer";
+import { RootState } from "./../config/root-reducer"
 
 const Routes = () => {
-	const { auth } = useSelector((state: RootState) => state)
+	const auth = useSelector((state: RootState) => state?.auth)
 
 	return (
 		<Router>
 			<WrapperRoutes>
-                {AuthedRoute.map((item, index) => {
+				{AuthedRoute.map((item, index) => {
 					return (
 						<Route
 							key={index.toString()}
 							path={item.path}
-							element={(<AuthedTemplate comp={item.component} token={auth?.token} />)}
+							element={(<AuthedTemplate comp={item.component} token={auth?.data?.access_token} />)}
 						/>
 					)
 				})}
@@ -39,7 +39,7 @@ const Routes = () => {
 						<Route
 							key={index.toString()}
 							path={item.path}
-							element={(<UnauthedTemplate comp={item.component} token={auth?.token} />)}
+							element={(<UnauthedTemplate comp={item.component} token={auth?.data?.access_token} />)}
 						/>
 					)
 				})}

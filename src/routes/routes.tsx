@@ -3,8 +3,8 @@ import Login from "./../pages/login"
 import Home from "./../pages/home"
 
 interface TypeObject {
-	path: string;
-	component?: any;
+	path: string
+	component?: any
 }
 
 interface TypesArray extends Array<TypeObject>{}

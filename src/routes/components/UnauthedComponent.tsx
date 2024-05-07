@@ -15,7 +15,7 @@ const UnauthedComponent = ({comp: Component, token}: Props) => {
             </Template>
         )
     } else {
-		return <Navigate to={"/"} />
+		return <Navigate to={"/dashboard"} />
 	}
 }
 
