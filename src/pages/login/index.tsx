@@ -13,10 +13,8 @@ import Checkbox from "./../../components/checkbox"
 import { signIn, defaultLogIn } from "./../../redux/authSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../config/root-reducer"
-import { useNavigate } from "react-router"
 
 const Login = () => {
-	const navigate = useNavigate()
 	const dispatch = useDispatch<any>()
 	const auth = useSelector((state: RootState) => state?.auth)
 
