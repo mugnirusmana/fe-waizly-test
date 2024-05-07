@@ -156,7 +156,7 @@ const Login = () => {
 				/>
 
 				<div className="flex flex-row gap-1 text-xs">
-					<span className="whitespace-nowrap">Did not have accoutn yet?</span>
+					<span className="whitespace-nowrap">Did not have acount yet?</span>
 					<span className="cursor-pointer font-bold">Register now</span>
 				</div>
 			</div>
