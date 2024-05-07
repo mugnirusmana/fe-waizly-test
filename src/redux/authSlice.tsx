@@ -3,11 +3,11 @@ import { Dispatch, createSlice } from "@reduxjs/toolkit"
 export interface Props {
     token?: string | null
     data: {}
-    isUnathorized: boolean
     isLoading: boolean
     isError: boolean
     isSuccess: boolean
-    errorMessage?: string | null
+    errorMessage?: string | null,
+    errorMeta: {}
 }
 
 interface ParamsSignInProps {
@@ -18,11 +18,11 @@ interface ParamsSignInProps {
 const initialState: Props = {
   token: null,
   data: {},
-  isUnathorized: false,
   isLoading: false,
   isError: false,
   isSuccess: false,
-  errorMessage: null
+  errorMessage: null,
+  errorMeta: {}
 }
 
 export const authSlice = createSlice({
@@ -36,6 +36,7 @@ export const authSlice = createSlice({
             state.errorMessage = null
             state.token = null
             state.data = {}
+            state.errorMeta = {}
         },
         defaultLogIn: (state: Props) => {
             state.isLoading = false
@@ -47,6 +48,7 @@ export const authSlice = createSlice({
             state.isSuccess = false
             state.isError = false
             state.errorMessage = null
+            state.errorMeta = {}
         },
         logInSuccess: (state: Props, action) => {
             state.isLoading = false
@@ -60,7 +62,8 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
-            state.errorMessage = action?.payload
+            state.errorMessage = action?.payload?.message
+            state.errorMeta = action?.payload?.errorMeta
         }
     }
 })

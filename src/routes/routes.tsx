@@ -1,35 +1,32 @@
-import Chart from "./../pages/chart"
+import Dashboard from "./../pages/dashboard"
 import Login from "./../pages/login"
 import Home from "./../pages/home"
-import Product from "./../pages/product"
-import ProductDetail from "./../pages/product-detail"
 
-const AuthedRoute = [
+interface TypeObject {
+	path: string;
+	component?: any;
+}
+
+interface TypesArray extends Array<TypeObject>{}
+
+const AuthedRoute: TypesArray = [
 	{
-		path: "/chart",
-		component: Chart,
+		path: "/dashboard",
+		component: Dashboard,
 	}
 ]
 
-const UnauthedRoute = [
+const UnauthedRoute: TypesArray = [
 	{
 		path: "/login",
 		component: Login,
 	}
 ]
 
-const PublicRoute = [
+const PublicRoute: TypesArray = [
 	{
 		path: "/",
 		component: Home,
-	},
-    {
-		path: "/product",
-		component: Product,
-	},
-    {
-		path: "/product/:id",
-		component: ProductDetail,
 	}
 ]
 

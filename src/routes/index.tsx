@@ -20,7 +20,7 @@ import PublicTemplate from "./components/PublicComponent"
 import { RootState } from "./../config/root-reducer";
 
 const Routes = () => {
-	const { token } = useSelector((state: RootState) => state.auth)
+	const { auth } = useSelector((state: RootState) => state)
 
 	return (
 		<Router>
@@ -30,7 +30,7 @@ const Routes = () => {
 						<Route
 							key={index.toString()}
 							path={item.path}
-							element={(<AuthedTemplate comp={item.component} token={token} />)}
+							element={(<AuthedTemplate comp={item.component} token={auth?.token} />)}
 						/>
 					)
 				})}
@@ -39,7 +39,7 @@ const Routes = () => {
 						<Route
 							key={index.toString()}
 							path={item.path}
-							element={(<UnauthedTemplate comp={item.component} token={token} />)}
+							element={(<UnauthedTemplate comp={item.component} token={auth?.token} />)}
 						/>
 					)
 				})}
