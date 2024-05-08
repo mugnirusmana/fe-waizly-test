@@ -106,52 +106,10 @@ const Dashboard = ({ children }: Props) => {
       ]
     },
     {
-      title: 'Frontend 2',
+      title: 'Frontend 1',
       icon: <FaDatabase />,
+      route: '/frontend-test-1',
       active: false,
-      showChildrens: false,
-      childrens: [
-        {
-          title: 'Test 1',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 2',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 3',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 4',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 5',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 6',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 7',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 8',
-          route: null,
-          active: false,
-        }
-      ]
     }
   ])
 
@@ -284,7 +242,7 @@ const Dashboard = ({ children }: Props) => {
   return (
     <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll relative text-gray-700">
       <div
-        className={`fixed w-[45px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-20 flex items-center`}
+        className={`fixed w-[45px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-[500] flex items-center`}
         onClick={() => setShowMenu(!showMenu)}
       >
         <div className="w-full h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
@@ -292,7 +250,7 @@ const Dashboard = ({ children }: Props) => {
           <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
         </div>
       </div>
-      <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-20`}>
+      <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-[500]`}>
         <div className="w-full flex flex-col gap-5 relative">
           <span className="w-full flex items-center justify-center text-2xl text-center p-5">Waizly<strong>Test</strong></span>
 
@@ -337,7 +295,7 @@ const Dashboard = ({ children }: Props) => {
           </div>
         </div>
         {children}
-        <div className="w-full min-h-[40px] bg-gray-300 mt-5 flex flex-row items-center justify-end text-xs px-5 text-gray-700">© copyright 2024 | Waizly<strong>Test</strong></div>
+        <div className="w-full min-h-[40px] bg-gray-300 mt-5 flex flex-row items-center justify-end text-xs px-5 text-gray-700 fixed bottom-0 z-[100]">© copyright 2024 | Waizly<strong>Test</strong></div>
       </div>
     </div>
   )
