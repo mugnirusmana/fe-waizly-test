@@ -30,7 +30,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    removeToken: (state: Props) => {
+    reducerRemoveToken: (state: Props) => {
       state.isLoading = false
       state.isSuccess = true
       state.isError = false
@@ -38,26 +38,26 @@ export const authSlice = createSlice({
       state.data = {}
       state.errorMeta = {}
     },
-    defaultLogIn: (state: Props) => {
+    reducerLoginDefault: (state: Props) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
     },
-    logIn: (state: Props) => {
+    reducerLogin: (state: Props) => {
       state.isLoading = true
       state.isSuccess = false
       state.isError = false
       state.errorMessage = null
       state.errorMeta = {}
     },
-    logInSuccess: (state: Props, payload) => {
+    reducerLoginSuccess: (state: Props, payload) => {
       state.isLoading = false
       state.isSuccess = true
       state.isError = false
       state.errorMessage = null
       state.data = payload?.payload
     },
-    logInFailed: (state: Props, payload) => {
+    reducerLoginFailed: (state: Props, payload) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = true
@@ -67,36 +67,34 @@ export const authSlice = createSlice({
   }
 })
 
-export const { removeToken, defaultLogIn, logIn, logInSuccess, logInFailed } = authSlice.actions
+export const { reducerRemoveToken, reducerLoginDefault, reducerLogin, reducerLoginSuccess, reducerLoginFailed } = authSlice.actions
 
 export const signIn = (params: ParamsSignInProps) => {
   return async (dispatch: any) => {
-    dispatch(logIn())
+    dispatch(reducerLogin())
     AUTH.login(params)
       .then((response) => {
         if (response?.data?.meta?.is_success) {
-          dispatch(logInSuccess(setSuccessAxios(response)))
+          dispatch(reducerLoginSuccess(setSuccessAxios(response)))
         } else {
-          dispatch(logInFailed(setErrorAxios(response)))
+          dispatch(reducerLoginFailed(setErrorAxios(response)))
         }
       })
-      .catch((error) => {
-        dispatch(logInFailed(setErrorAxios(error?.response)))
-      })
+      .catch((error) => dispatch(reducerLoginFailed(setErrorAxios(error?.response))))
   }
 }
 
 export const defaultSignIn = () => {
   return async (dispatch: Function) => {
-    dispatch(defaultLogIn())
+    dispatch(reducerLoginDefault())
   }
 }
 
 export const logOut = () => {
   return async (dispatch: Function) => {
-    dispatch(logIn())
+    dispatch(reducerLogin())
     setTimeout(() => {
-      dispatch(removeToken())
+      dispatch(reducerRemoveToken())
     }, 1500)
   }
 }

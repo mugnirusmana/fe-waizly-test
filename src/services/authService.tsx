@@ -11,3 +11,7 @@ interface loginType {
 export const login = (params: loginType) => {
   return axios.post(`${ENV.API}/login`, params, {})
 }
+
+export const register = (params: loginType) => {
+  return axios.post(`${ENV.API}/register`, params, {})
+}

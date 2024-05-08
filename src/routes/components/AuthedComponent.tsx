@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 
-import Template from "./../template"
+import AuthedTemplate from "./../templates/authedTemplate"
 
 interface Props {
     comp: any
@@ -8,15 +8,15 @@ interface Props {
 }
 
 const AuthedComponent = ({comp: Component, token}: Props) => {
-    if (token) {
-        return (
-            <Template>
-                <Component />
-            </Template>
-        )
-    } else {
-		return <Navigate to={"/login"} />
-	}
+  if (token) {
+    return (
+      <AuthedTemplate>
+        <Component />
+      </AuthedTemplate>
+    )
+  } else {
+    return <Navigate to={"/login"} />
+  }
 }
 
 export default AuthedComponent

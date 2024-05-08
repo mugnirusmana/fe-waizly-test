@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { IoEye } from "@react-icons/all-files/io5/IoEye"
 import { IoEyeOff } from "@react-icons/all-files/io5/IoEyeOff"
 import { IoPerson } from "@react-icons/all-files/io5/IoPerson"
@@ -10,11 +11,12 @@ import Button from "./../../components/auth/button"
 import Alert from "./../../components/auth/alert"
 import Checkbox from "./../../components/checkbox"
 
-import { signIn, defaultLogIn } from "./../../redux/authSlice"
+import { signIn, defaultSignIn } from "./../../redux/authSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../config/root-reducer"
 
 const Login = () => {
+	const navigate = useNavigate()
 	const dispatch = useDispatch<any>()
 	const auth = useSelector((state: RootState) => state?.auth)
 
@@ -55,7 +57,7 @@ const Login = () => {
 		} = auth
 
 		if (!isLoading && isSuccess) {
-			dispatch(defaultLogIn())
+			dispatch(defaultSignIn())
 		}
 
 		if (!isLoading && isError) {
@@ -74,7 +76,7 @@ const Login = () => {
 				isError: errorMeta?.error?.password? true : false,
 				errorMessage: errorMeta?.error?.password??''
 			})
-			dispatch(defaultLogIn())
+			dispatch(defaultSignIn())
 		}
 	}, [auth])
 
@@ -138,9 +140,9 @@ const Login = () => {
 							onCheck={(res: boolean) => setRememberMe(res)}
 						/>
 					</div>
-					<div className="flex flex-row gap-1">
+					{/* <div className="flex flex-row gap-1">
 						<span className="whitespace-nowrap text-xs cursor-pointer">Forgot Password?</span>
-					</div>
+					</div> */}
 				</div>
 
 				<Button
@@ -159,7 +161,10 @@ const Login = () => {
 
 				<div className="flex flex-row gap-1 text-xs">
 					<span className="whitespace-nowrap">Did not have acount yet?</span>
-					<span className="cursor-pointer font-bold">Register now</span>
+					<span
+						className="cursor-pointer font-bold"
+						onClick={() => navigate('/register')}
+					>Register now</span>
 				</div>
 			</div>
 

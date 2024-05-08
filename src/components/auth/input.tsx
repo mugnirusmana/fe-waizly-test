@@ -94,17 +94,23 @@ const Input = ({
     if (value) {
       return (
         <div
-          className={`w-fit pr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} cursor-pointer`}
-          onClick={() => onClearText ? onClearText({
-            name: name??null,
-            isError: false,
-            errorMessage: '',
-            value: ''
-          }) : {}}
+          className={`w-[15px] mr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} cursor-pointer`}
+          onClick={() => onClearText ? setValidate("") : {}}
         ><IoClose /></div>
       )
     }
     return null
+  }
+
+  const renderIcon = () => {
+    if (icon) {
+      return (
+        <div
+          className={`w-[15px] mr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} ${onClickIcon ? 'cursor-pointer' : 'cursor-default'}`}
+          onClick={() => onClickIcon ? onClickIcon() : {}}
+        >{icon}</div>
+      )
+    }
   }
 
   return (
@@ -118,10 +124,7 @@ const Input = ({
           value={value??""}
         />
         {renderClearText()}
-        <div
-          className={`w-fit pr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} ${onClickIcon ? 'cursor-pointer' : 'cursor-default'}`}
-          onClick={() => onClickIcon ? onClickIcon() : {}}
-        >{icon}</div>
+        {renderIcon()}
       </div>
       <span className={`text-red-300 text-xs duration-300 ${isError ? 'opacity-100' : 'opacity-0'}`}>{isError ? errorMessage : '.'}</span>
     </div>
