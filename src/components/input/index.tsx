@@ -100,7 +100,7 @@ const Input = ({
   }
 
   const renderClearText = () => {
-    if (value) {
+    if (value && onClearText) {
       return (
         <div
           className={`w-[15px] mr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-rose-500' : 'text-gray-700'} cursor-pointer`}
@@ -135,7 +135,7 @@ const Input = ({
 
   const renderDetailRequired = () => {
     if (validate?.fields?.required) {
-      return <span className="text-[9px]">{validate?.customMessage?.required? `- validate?.customMessage?.required` : `- ${name??'this field'} is required`}</span>
+      return <span className="text-[9px]">{validate?.customMessage?.required? `- ${validate?.customMessage?.required}` : `- ${name??'this field'} is required`}</span>
     }
     return null
   }
@@ -143,21 +143,21 @@ const Input = ({
   const renderDetailMin = () => {
     if (validate?.fields?.min) {
       
-      return <span className="text-[9px]">{validate?.customMessage?.max? `- validate?.customMessage?.max` : `- ${name??'this field'} minimum length ${validate?.fields?.min} character${validate?.fields?.min > 1 ? 's' : ''}`}</span>
+      return <span className="text-[9px]">{validate?.customMessage?.max? `- ${validate?.customMessage?.max}` : `- ${name??'this field'} minimum length ${validate?.fields?.min} character${validate?.fields?.min > 1 ? 's' : ''}`}</span>
     }
     return null
   }
 
   const renderDetailMax = () => {
     if (validate?.fields?.max) {
-      return <span className="text-[9px]">{validate?.customMessage?.max? `- validate?.customMessage?.max` : `- ${name??'this field'} maximum length ${validate?.fields?.max} character${validate?.fields?.max > 1 ? 's' : ''}`}</span>
+      return <span className="text-[9px]">{validate?.customMessage?.max? `- ${validate?.customMessage?.max}` : `- ${name??'this field'} maximum length ${validate?.fields?.max} character${validate?.fields?.max > 1 ? 's' : ''}`}</span>
     }
     return null
   }
 
   const renderDetailRegex = () => {
     if (validate?.fields?.regex) {
-      return <span className="text-[9px]">{validate?.customMessage?.regex? `- validate?.customMessage?.regex` : `- ${name??'this field'} has custom format regex`}</span>
+      return <span className="text-[9px]">{`- ${name??'This field'} has custom format regex`}</span>
     }
     return null
   }
@@ -185,10 +185,12 @@ const Input = ({
 
   return (
     <div className={`${widthFit ? 'w-fit' : 'w-full'} flex flex-col gap-1`}>
-      <div className="w-fit flex flex-row gap-1 items-center">
-        <span className="text-sm">{label??''}</span>
-        {validate?.fields?.required ? <strong className="text-rose-400 text-xs">*</strong> : null}
-      </div>
+      {label ? (
+        <div className="w-fit flex flex-row gap-1 items-center">
+          <span className="text-sm">{label}</span>
+          {validate?.fields?.required ? <strong className="text-rose-400 text-xs">*</strong> : null}
+        </div>
+      ) : null}
       <div className={`w-full flex flex-row items-center rounded-md border duration-300 relative ${isError ? 'border-rose-500' : 'border-gray-700'}`}>
         <input
           type={type}

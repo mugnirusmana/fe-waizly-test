@@ -47,7 +47,7 @@ const Dashboard = ({ children }: Props) => {
         },
         {
           title: 'Test 3',
-          route: null,
+          route: '/basic-test-3',
           active: false,
         }
       ]
@@ -284,12 +284,12 @@ const Dashboard = ({ children }: Props) => {
   return (
     <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll relative text-gray-700">
       <div
-        className={`fixed w-[60px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-20 flex items-center`}
+        className={`fixed w-[45px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-20 flex items-center`}
         onClick={() => setShowMenu(!showMenu)}
       >
-        <div className="w-[35px] h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
-          <div className={`w-[20px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'top-[27px] rotate-45' : 'top-5 rotate-0'}`}></div>
-          <div className={`w-[20px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
+        <div className="w-full h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
+          <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'top-[27px] rotate-45' : 'top-5 rotate-0'}`}></div>
+          <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
         </div>
       </div>
       <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-20`}>

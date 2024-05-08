@@ -2,6 +2,7 @@ import BlankPage from "./../pages/blank-page"
 import Dashboard from "./../pages/dashboard"
 import BasicTest1 from "./../pages/basic-test-1"
 import BasicTest2 from "./../pages/basic-test-2"
+import BasicTest3 from "./../pages/basic-test-3"
 
 import Login from "./../pages/login"
 import Register from "./../pages/register"
@@ -31,6 +32,10 @@ const AuthedRoute: TypesArray = [
 	{
 		path: "/basic-test-2",
 		component: BasicTest2,
+	},
+	{
+		path: "/basic-test-3",
+		component: BasicTest3,
 	}
 ]
 
