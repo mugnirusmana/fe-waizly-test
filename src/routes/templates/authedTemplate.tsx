@@ -272,7 +272,7 @@ const Dashboard = ({ children }: Props) => {
       </div>
 
       <div className="w-full h-full flex flex-col">
-        <div className="w-full min-h-[60px] bg-[#ffbc79] fixed top-0 flex flex-row pr-5 items-center justify-end text-xs">
+        <div className="w-full min-h-[60px] bg-[#ffbc79] fixed top-0 flex flex-row pr-5 items-center justify-end text-xs z-[30]">
           <div className="w-fit h-fit relative">
             <img
               src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"

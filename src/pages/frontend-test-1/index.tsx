@@ -199,7 +199,7 @@ const FrontendTest1 = () => {
         ]}
       />
       <div className="w-full h-full">
-        <div className="w-full h-full flex flex-row gap-5 px-5">
+        <div className="w-full h-fit flex flex-row gap-5 px-5">
           <div className="w-full h-full flex flex-col bg-white rounded p-5 relative">
             {renderLoader(listTodo?.isLoading || sortTask?.isLoading)}
             <div className="w-full flex flex-row justify-between items-center">
@@ -216,14 +216,15 @@ const FrontendTest1 = () => {
               <Input value={keywordTodo?.value} onChange={(e: any) => setKeywordTodo(e)} onClearText={(e: any) => setKeywordTodo(e)} placeholder="Find todo task" />
             </div>
 
-            <div className="w-full h-full flex flex-col pb-10">
+            <div className="w-full h-fit flex flex-col pb-2">
               <div
                 className="list"
                 ref={_container}
                 style={{
+                  overflow: 'scroll !important',
                   padding: '0',
                   marginBottom: '0',
-                  marginTop: '20px',
+                  marginTop: '30px',
                   marginLeft: '0',
                   marginRight: '0',
                   borderRadius: '10px',
@@ -249,11 +250,12 @@ const FrontendTest1 = () => {
               <Input value={keywordComplete?.value} onChange={(e: any) => setKeywordComplete(e)} onClearText={(e: any) => setKeywordComplete(e)} placeholder="Find complete task" />
             </div>
 
-            <div className="w-full h-full flex flex-col pb-10">
+            <div className="w-full h-full flex flex-col pb-2">
               <div
                 className="list"
                 ref={_container}
                 style={{
+                  overflow: 'scroll',
                   padding: '0',
                   marginBottom: '0',
                   marginTop: '20px',
