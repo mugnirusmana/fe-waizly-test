@@ -216,7 +216,7 @@ const FrontendTest1 = () => {
               <Input value={keywordTodo?.value} onChange={(e: any) => setKeywordTodo(e)} onClearText={(e: any) => setKeywordTodo(e)} placeholder="Find todo task" />
             </div>
 
-            <div className="w-full h-fit flex flex-col pb-2">
+            <div className="w-full h-fit flex flex-col pb-10">
               <div
                 className="list"
                 ref={_container}
@@ -250,7 +250,7 @@ const FrontendTest1 = () => {
               <Input value={keywordComplete?.value} onChange={(e: any) => setKeywordComplete(e)} onClearText={(e: any) => setKeywordComplete(e)} placeholder="Find complete task" />
             </div>
 
-            <div className="w-full h-full flex flex-col pb-2">
+            <div className="w-full h-full flex flex-col pb-10">
               <div
                 className="list"
                 ref={_container}
