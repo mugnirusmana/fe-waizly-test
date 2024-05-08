@@ -3,6 +3,7 @@ import AuthSlice from "./../redux/authSlice"
 import SignUpSlice from "../redux/signUpSlice"
 import ListTodoSlice from "../redux/listTodoSlice"
 import ListCompleteSlice from "../redux/listCompleteSlice"
+import CreateTaskSlice from "../redux/createTaskSlice"
 import SortTaskSlice from "../redux/sortTaskSlice"
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     signUp: SignUpSlice,
     listTodo: ListTodoSlice,
     listComplete: ListCompleteSlice,
+    createTask: CreateTaskSlice,
     sortTask: SortTaskSlice,
 })
 

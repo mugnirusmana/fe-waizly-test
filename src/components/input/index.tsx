@@ -170,7 +170,7 @@ const Input = ({
   const renderInfo = () => {
     if (showInfoInput) {
       return (
-        <div className="absolute w-[250px] top-7 right-0 bg-white text-xs border boder-gray-400 p-2 rounded flex flex-col shadow-md">
+        <div className="absolute w-[250px] top-7 right-0 bg-white text-xs border boder-gray-400 p-2 rounded flex flex-col shadow-md z-[70]">
           <span className="font-bold mb-1">The rules:</span>
           {renderDetailRequired()}
           {renderDetailMin()}

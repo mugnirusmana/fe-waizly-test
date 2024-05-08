@@ -26,7 +26,7 @@ const Alert = ({show, title, message, type, withConfirm, cancelLabel, onCancel, 
   }
 
   return (
-    <div className={`w-full h-full absolute duration-300 ${show ? 'top-0' : 'top-[3000px]'} left-0 z-50 flex items-center justify-center backdrop-blur-sm`}>
+    <div className={`w-full h-full absolute duration-300 ${show ? 'top-0' : 'top-[3000px]'} left-0 flex items-center justify-center backdrop-blur-sm z-[1000]`}>
       <div className="w-1/3 h-fit p-5 bg-white rounded border border-gray-200 shadow-lg flex flex-col items-center gap-2">
         {renderType()}
         <span className=" text-center font-bold">{title}</span>

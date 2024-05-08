@@ -9,13 +9,18 @@ import { RootState } from "../../config/root-reducer"
 import { getTodo, setDefaultTodo } from "../../redux/listTodoSlice"
 import { getComplete, setDefaultComplete } from "../../redux/listCompleteSlice"
 import { setSort, setDefaultSortTask } from "../../redux/sortTaskSlice"
+import { setCreate, setDefaultCreateTask } from "../../redux/createTaskSlice"
+
 import Input from "../../components/input"
+import Modal from "../../components/modal"
+import Button from "../../components/button"
 
 const FrontendTest1 = () => {
   const dispatch = useDispatch<any>()
-  const { listTodo, listComplete, sortTask } = useSelector((state: RootState) => state)
+  const { listTodo, listComplete, createTask, sortTask } = useSelector((state: RootState) => state)
   const _container = React.createRef<HTMLDivElement>()
 
+  const [showModalAdd, setShowModalAdd] = useState(false)
   const [keywordTodo, setKeywordTodo] = useState({
     value: '',
     isError: false,
@@ -28,6 +33,16 @@ const FrontendTest1 = () => {
     errorMessage: ''
   })
   const [dataComplete, setDataComplete] = useState<any>([])
+  const [newName, setNewName] = useState({
+    value: '',
+    isError: false,
+    errorMessage: ''
+  })
+  const [newDesc, setNewDesc] = useState({
+    value: '',
+    isError: false,
+    errorMessage: ''
+  })
 
   useEffect(() => {
     dispatch(getTodo({status: '1', keyword: keywordTodo?.value}))
@@ -68,6 +83,36 @@ const FrontendTest1 = () => {
 
   useEffect(() => {
     let {
+      isLoading,
+      isSuccess,
+      isError,
+      errorMeta
+    } = createTask
+
+    if (!isLoading && isSuccess) {
+      dispatch(setDefaultCreateTask())
+      setShowModalAdd(false)
+      resetModalAdd()
+      dispatch(getTodo({status: '1', keyword: keywordTodo?.value}))
+    }
+
+    if (!isLoading && isError) {
+      setNewName({
+				...newName,
+				isError: errorMeta?.error?.name? true : false,
+				errorMessage: errorMeta?.error?.name??''
+			})
+			setNewDesc({
+				...newDesc,
+				isError: errorMeta?.error?.description? true : false,
+				errorMessage: errorMeta?.error?.description??''
+			})
+      dispatch(setDefaultCreateTask())
+    }
+  }, [createTask])
+
+  useEffect(() => {
+    let {
       data,
       isLoading,
       isSuccess,
@@ -97,6 +142,19 @@ const FrontendTest1 = () => {
       dispatch(getComplete({status: '2', keyword: keywordComplete?.value}))
     }
   }, [sortTask])
+
+  const resetModalAdd = () => {
+    setNewName({
+      value: '',
+      isError: false,
+      errorMessage: ''
+    })
+    setNewDesc({
+      value: '',
+      isError: false,
+      errorMessage: ''
+    })
+  }
 
   const setNewListTodo = (newListTodo: any) => {
     setDataTodo(newListTodo)
@@ -146,7 +204,10 @@ const FrontendTest1 = () => {
             {renderLoader(listTodo?.isLoading || sortTask?.isLoading)}
             <div className="w-full flex flex-row justify-between items-center">
               <span className="font-bold text-2xl">List Task Todo</span>
-              <div className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-cyan-700 hover:border-cyan-700 cursor-pointer">
+              <div
+                className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-cyan-700 hover:border-cyan-700 cursor-pointer"
+                onClick={() => setShowModalAdd(true)}
+              >
                 <FaPlus className="text-xs" />
               </div>
             </div>
@@ -214,6 +275,76 @@ const FrontendTest1 = () => {
           </div>
         </div>
       </div>
+
+      <Modal show={showModalAdd}>
+        <div className="w-full h-full flex flex-col gap-5 relative">
+          <span className="w-full flex items-center justify-center text-center font-bold">Add New Task</span>
+          <Button
+            label="X"
+            type="reset"
+            customClass={'absolute top-0 right-0 rounded-full text-xs'}
+            onClick={() => {
+              resetModalAdd()
+              setShowModalAdd(false)
+            }}
+          />
+          <Input
+            label="Name"
+            value={newName?.value}
+            onChange={(e: any) => setNewName(e)}
+            isError={newName?.isError}
+            errorMessage={newName?.errorMessage}
+            placeholder="Name"
+            validate={{
+              fields: {
+                required: true,
+                min: 5,
+                max: 20
+              },
+            }}
+          />
+
+          <Input
+            label="Description"
+            value={newDesc?.value}
+            onChange={(e: any) => setNewDesc(e)}
+            isError={newDesc?.isError}
+            errorMessage={newDesc?.errorMessage}
+            placeholder="Description"
+            validate={{
+              fields: {
+                required: true,
+                min: 5,
+                max: 255
+              },
+            }}
+          />
+
+          <div className="w-full flex flex-row gap-5">
+            <Button
+              full
+              disabled={createTask?.isLoading}
+              label={createTask?.isLoading ? "Loading..." : "Reset"}
+              type="reset"
+              onClick={() => resetModalAdd()}
+            />
+
+            <Button
+              full
+              disabled={createTask?.isLoading || newName?.isError || newDesc?.isError}
+              label={createTask?.isLoading ? "Loading..." : "Submit"}
+              type="submit"
+              onClick={() => {
+                let params = {
+                  name: newName?.value,
+                  description: newDesc?.value,
+                }
+                dispatch(setCreate(params))
+              }}
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

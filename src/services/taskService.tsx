@@ -17,6 +17,15 @@ export const getList = (params: loginType) => {
   })
 }
 
+export const add = (params: any) => {
+  const token = localStorage.getItem('token')
+  return axios.post(`${ENV.API}/fe-test-1/create`, params, {
+    headers: {
+      'Authorization': token
+    },
+  })
+}
+
 export const sort = (data: any) => {
   const token = localStorage.getItem('token')
   return axios.post(`${ENV.API}/fe-test-1/sort`, {

@@ -4,9 +4,10 @@ interface Props {
   label?: string
   onClick?: Function
   disabled?: boolean
+  customClass?: string
 }
 
-const Button = ({type, label, full, disabled, onClick}: Props) => {
+const Button = ({type, label, full, disabled, onClick, customClass}: Props) => {
   const renderStyle = () => {
     if (disabled) {
       return `cursor-not-allowed bg-gray-200 text-gray-400 border border-gray-400`
@@ -16,7 +17,7 @@ const Button = ({type, label, full, disabled, onClick}: Props) => {
   }
   return (
     <div
-      className={`${full ? 'w-full' : 'w-fit'} ${renderStyle()} flex flex-row items-center justify-center text-center rounded text-xs px-4 py-2`}
+      className={`${full ? 'w-full' : 'w-fit'} ${renderStyle()} flex flex-row items-center justify-center text-center rounded text-xs px-4 py-2 ${customClass}`}
       onClick={() => onClick && !disabled ? onClick() : {}}
     >{label??'Button'}</div>
   )
