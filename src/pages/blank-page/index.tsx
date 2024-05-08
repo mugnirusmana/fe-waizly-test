@@ -1,14 +1,12 @@
 import Breadcrumb from "./../../components/breadcrumb"
 
-const BasicTest1 = () => {
+const BlankPage = () => {
   return (
     <div className="w-full h-full flex flex-col gap-5 pt-[60px]">
       <Breadcrumb
-        title="Basic"
-        subtitle="Test 1"
+        title="Blank Page"
         data={[
-          { title: 'Basic', route: '/basic-test-1', active: false },
-          { title: 'Test 1', route: '', active: true }
+          { title: 'Blank Page', route: '', active: true }
         ]}
       />
       <div className="w-full h-full px-5">
@@ -20,4 +18,4 @@ const BasicTest1 = () => {
   )
 }
 
-export default BasicTest1
+export default BlankPage

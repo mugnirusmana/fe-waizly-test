@@ -1,10 +1,15 @@
+import { ReactNode, useEffect, useState } from "react"
+import { useNavigate } from "react-router"
+
 import { FaChartPie } from "@react-icons/all-files/fa/FaChartPie"
 import { FaCaretRight } from "@react-icons/all-files/fa/FaCaretRight"
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase"
 import { FaAngleRight } from "@react-icons/all-files/fa/FaAngleRight"
 import { FaFile } from "@react-icons/all-files/fa/FaFile"
-import { ReactNode, useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+
+import { useDispatch, useSelector } from "react-redux"
+import { logOut } from "./../../redux/authSlice"
+import { RootState } from "../../config/root-reducer"
 
 interface Props {
   children: ReactNode
@@ -12,6 +17,11 @@ interface Props {
 
 const Dashboard = ({ children }: Props) => {
   const navigate = useNavigate()
+  const { auth } = useSelector((state: RootState) => state)
+  const dispatch = useDispatch<any>()
+
+  const [showMenu, setShowMenu] = useState(false)
+  const [showSetting, setShowSetting] = useState(false)
   const [menu, setMenu] = useState([
     {
       title: 'Dashboard',
@@ -213,9 +223,10 @@ const Dashboard = ({ children }: Props) => {
         return (
           <div
             key={index_c}
-            className={`flex flex-row gap-2 items-center cursor-pointer duration-100 hover:text-orange-400 ${item_c?.active ? 'text-orange-400' : ''}`}
+            className={`flex flex-row gap-2 items-center cursor-pointer duration-300 hover:text-orange-400 ${item_c?.active ? 'text-orange-400' : ''}`}
             onClick={() => {
               if (item_c?.route) {
+                setShowMenu(false)
                 setActiveMenu(item_c?.route)
                 navigate(item_c?.route)
               }
@@ -233,7 +244,7 @@ const Dashboard = ({ children }: Props) => {
     return (
       <div key={index} className="px-5 flex flex-col">
         <div
-          className={`flex flex-row justify-between mb-1 items-center cursor-pointer hover:text-orange-400 duration-100 ${item?.active ? 'text-orange-400' : ''}`}
+          className={`flex flex-row justify-between mb-1 items-center cursor-pointer hover:text-orange-400 duration-300 ${item?.active ? 'text-orange-400' : ''}`}
           onClick={() => {
             setShowChildren(!item?.showChildrens, item?.title)
           }}
@@ -255,9 +266,10 @@ const Dashboard = ({ children }: Props) => {
     return (
       <span
         key={index}
-        className={`w-fit cursor-pointer px-5 flex flex-row gap-2 items-center duration-100 hover:text-orange-400 ${item?.active ? 'text-orange-400' : ''}`}
+        className={`w-fit cursor-pointer px-5 flex flex-row gap-2 items-center duration-300 hover:text-orange-400 ${item?.active ? 'text-orange-400' : ''}`}
         onClick={() => {
           if (item?.route) {
+            setShowMenu(false)
             setActiveMenu(item?.route)
             navigate(item?.route)
           }
@@ -270,30 +282,62 @@ const Dashboard = ({ children }: Props) => {
   }
 
   return (
-    <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll relative">
-      <div className="w-[250px] h-full bg-gray-700 text-white flex flex-col gap-5 text-base overflow-y-scroll hide-scroll">
-        <span className="w-full flex items-center justify-center text-2xl text-center p-5">Waizly<strong>Test</strong></span>
-
-        <div className="w-full flex flex-col items-center justify-center gap-2 p-5">
-          <img
-            src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
-            alt="profile"
-            className="w-[60px] h-[60px] object-cover rounded-full"
-          />
-          <span className="text-sm text-center">Ade Mugni Rusmana</span>
+    <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll relative text-gray-700">
+      <div
+        className={`fixed w-[60px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-20 flex items-center`}
+        onClick={() => setShowMenu(!showMenu)}
+      >
+        <div className="w-[35px] h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
+          <div className={`w-[20px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'top-[27px] rotate-45' : 'top-5 rotate-0'}`}></div>
+          <div className={`w-[20px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
         </div>
-        
-        <div className="w-full h-full flex flex-col gap-4 text-base text-gray-500 font-bold">
-          <span className="text-gray-600 text-xs">--- MENU</span>
-          {renderMenu()}
-          <span className="w-full min-h-[10px]"></span>
+      </div>
+      <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-20`}>
+        <div className="w-full flex flex-col gap-5 relative">
+          <span className="w-full flex items-center justify-center text-2xl text-center p-5">Waizly<strong>Test</strong></span>
+
+          <div className="w-full flex flex-col items-center justify-center gap-2 px-5">
+            <img
+              src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
+              alt="profile"
+              className="w-[60px] h-[60px] object-cover rounded-full border-2 border-gray-200"
+            />
+            <span className="text-sm text-center">{auth?.data?.name}</span>
+          </div>
+
+          <div className="w-full h-full flex flex-col gap-4 text-base text-gray-500 font-bold">
+            <span className="text-gray-600 text-xs">--- MENU</span>
+            {renderMenu()}
+            <span className="w-full min-h-[10px]"></span>
+          </div>
         </div>
       </div>
 
-      <div className="w-full full flex flex-col">
-        <div className="w-full min-h-[60px] bg-[#ffbc79] fixed top-0"></div>
+      <div className="w-full h-full flex flex-col">
+        <div className="w-full min-h-[60px] bg-[#ffbc79] fixed top-0 flex flex-row pr-5 items-center justify-end text-xs">
+          <div className="w-fit h-fit relative">
+            <img
+              src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
+              alt="profile"
+              className="w-[30px] h-[30px] object-cover rounded-full border-2 border-gray-700 cursor-pointer"
+              onClick={() => setShowSetting(!showSetting)}
+            />
+            <div className={`w-[80px] h-fit bg-white border border-gray-200 duration-300 absolute top-8 shadow-lg ${showSetting ? 'right-0' : '-right-28'} rounded flex flex-col gap-2 p-2`}>
+              <span
+                className="cursor-pointer hover:underline"
+                onClick={() => {
+                  setShowSetting(false)
+                }}
+              >Profile</span>
+              <span
+                className={`${auth?.isLoading ? 'cursor-default' : 'cursor-pointer'} hover:underline`}
+                onClick={() => !auth?.isLoading ? dispatch(logOut()) : {}}
+              >{auth?.isLoading ? 'Loading...' : 'Logout'}</span>
+            </div>
+          </div>
+        </div>
         {children}
-        <div className="w-full min-h-[40px] bg-gray-800 mt-5"></div>
+        <div className="w-full min-h-[40px] bg-gray-300 mt-5 flex flex-row items-center justify-end text-xs px-5 text-gray-700">© copyright 2024 | Waizly<strong>Test</strong></div>
       </div>
     </div>
   )

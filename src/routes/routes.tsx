@@ -1,3 +1,4 @@
+import BlankPage from "./../pages/blank-page"
 import Dashboard from "./../pages/dashboard"
 import BasicTest1 from "./../pages/basic-test-1"
 import BasicTest2 from "./../pages/basic-test-2"
@@ -15,6 +16,10 @@ interface TypeObject {
 interface TypesArray extends Array<TypeObject>{}
 
 const AuthedRoute: TypesArray = [
+	{
+		path: "/blank-page",
+		component: BlankPage,
+	},
 	{
 		path: "/dashboard",
 		component: Dashboard,
