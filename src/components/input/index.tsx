@@ -63,7 +63,7 @@ const Input = ({
       if (validate) {
         let msg = null
         if(validate?.fields?.regex) {
-          if (!validate?.fields?.regex.test(val)) {
+          if (val && !validate?.fields?.regex.test(val)) {
             msg = validate?.customMessage?.regex??`${fieldName} format is invalid`
             res.isError = true
             res.errorMessage = msg
@@ -71,7 +71,7 @@ const Input = ({
         }
 
         if(validate?.fields?.max) {
-          if (val?.length > validate?.fields?.max) {
+          if (val && val?.length > validate?.fields?.max) {
             msg = validate?.customMessage?.max??`${fieldName} maximum length ${validate?.fields?.max} character${val?.length > 1 ? 's' : ''}`
             res.isError = true
             res.errorMessage = msg
@@ -79,7 +79,7 @@ const Input = ({
         }
 
         if(validate?.fields?.min) {
-          if (val?.length < validate?.fields?.min) {
+          if (val && val?.length < validate?.fields?.min) {
             msg = validate?.customMessage?.min??`${fieldName} minimum length ${validate?.fields?.min} character${val?.length > 1 ? 's' : ''}`
             res.isError = true
             res.errorMessage = msg

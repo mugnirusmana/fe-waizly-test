@@ -313,7 +313,6 @@ const FrontendTest1 = () => {
             placeholder="Description"
             validate={{
               fields: {
-                required: true,
                 min: 5,
                 max: 255
               },
