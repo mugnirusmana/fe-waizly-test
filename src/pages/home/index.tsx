@@ -20,7 +20,7 @@ const Home = () => {
                 <img src={ImgLanscape} alt="bg" className="w-full h-full object-cover absolute top-0 left-0" />
                 <div className="w-full h-full bg-black opacity-50 absolute top-0 left-0" />
 
-                <div className={`w-1/3 h-fit backdrop-blur border border-white rounded flex flex-col items-center p-10 gap-5 drop-shadow-lg shadow-lg duration-100 ${showForm}`}>
+                <div className={`w-full tablet:w-1/3 h-fit backdrop-blur border border-white rounded flex flex-col items-center p-10 gap-5 drop-shadow-lg shadow-lg duration-100 ${showForm}`}>
                     <div className="w-full flex flex-col items-center justify-center pb-5">
                         <span className="w-full flex items-center justify-center text-xl  text-center">FRONTEND TECHNICAL TEST</span>
                         <span className="w-full flex items-center justify-center text-xl  text-center font-bold">WAIZLY</span>

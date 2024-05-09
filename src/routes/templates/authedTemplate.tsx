@@ -242,7 +242,7 @@ const Dashboard = ({ children }: Props) => {
           </div>
         </div>
         {children}
-        <div className="w-full min-h-[40px] bg-gray-300 mt-5 flex flex-row items-center justify-end text-xs px-5 text-gray-700 fixed bottom-0 z-[100]">© copyright 2024 | Waizly<strong>Test</strong></div>
+        <div className="w-full min-h-[40px] bg-gray-300 mt-5 flex flex-row items-center justify-center laptop:justify-end text-xs px-5 text-gray-700 fixed bottom-0 z-[100]">© copyright 2024 | Waizly<strong>Test</strong></div>
       </div>
     </div>
   )

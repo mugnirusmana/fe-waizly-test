@@ -161,6 +161,12 @@ const FrontendTest1 = () => {
       resetModalAdd()
       dispatch(getTodo({status: '1', keyword: keywordTodo?.value}))
       dispatch(getComplete({status: '2', keyword: keywordComplete?.value}))
+      setGlobalAlert({
+        title: 'Edit',
+        message: 'Data successfully updated',
+        type: 'success',
+        show: true
+      })
     }
 
     if (!isLoading && isError) {
@@ -315,125 +321,132 @@ const FrontendTest1 = () => {
     return null
   }
 
-  const renderDataTask = (data: any, type?: string) => {
-    return data?.map((item: any, index: number) => {
-      return (
-        <div key={index} className="w-full h-fit flex flex-row justify-between border border-gray-200 rounded p-2 shadow-md">
-          <div className="w-fit flex flex-col">
-            <span className="font-bold text-sm whitespace-nowrap">{item?.name}</span>
-            <span className="text-[8px] whitespace-nowrap">created by: {auth?.data?.name}</span>
-          </div>
-          <div className="w-fit flex flex-row gap-1">
-            <div
-              className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-teal-700 hover:border-bg-teal-700 cursor-pointer"
-              onClick={() => setModalDetail({
-                show: true,
-                data: item
-              })}
-            >
-              <FaEye className="text-xs" />
-            </div>
-            <div
-              className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-lime-700 hover:border-bg-lime-700 cursor-pointer"
-              onClick={() => {
-                setEditId(item?.id)
-                setNewName({
-                  ...newName,
-                  value: item?.name
-                })
-                setNewDesc({
-                  ...newDesc,
-                  value: item?.desc
-                })
-                setShowModalEdit(true)
-              }}
-            >
-              <FaPen className="text-xs" />
-            </div>
-            {type === 'todo' ? (
-              <div
-                className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-emerald-700 hover:border-bg-emerald-700 cursor-pointer"
-                onClick={() => {
-                  setConfirmAlert({
-                    show: true,
-                    title: 'Todo',
-                    message: `Will set ${item?.name} back to todo?`,
-                    onCancel: () => {
-                      setConfirmAlert({
-                        ...confirmAlert,
-                        show: false,
-                      })
-                    },
-                    onConfirm: () => {
-                      dispatch(setTodo(item?.id))
-                      setConfirmAlert({
-                        ...confirmAlert,
-                        show: false,
-                      })
-                    }
-                  })
-                }}
-              >
-                <FaCaretLeft className="text-xs" />
+  const renderDataTask = (data: any, type?: string, isLoading?: boolean) => {
+    if (!isLoading) {
+      if (data?.length > 0) {
+        return data?.map((item: any, index: number) => {
+          return (
+            <div key={index} className="w-full h-fit flex flex-row justify-between border border-gray-200 rounded p-2 shadow-md">
+              <div className="w-fit flex flex-col">
+                <span className="font-bold text-sm whitespace-nowrap">{item?.name}</span>
+                <span className="text-[8px] whitespace-nowrap">created by: {auth?.data?.name}</span>
               </div>
-            ) : null}
-            {type === 'complete' ? (
-              <div
-                className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-emerald-700 hover:border-bg-emerald-700 cursor-pointer"
-                onClick={() => {
-                  setConfirmAlert({
+              <div className="w-fit flex flex-row gap-1">
+                <div
+                  className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-teal-700 hover:border-bg-teal-700 cursor-pointer"
+                  onClick={() => setModalDetail({
                     show: true,
-                    title: 'Complete',
-                    message: `Will set ${item?.name} as to complete task?`,
-                    onCancel: () => {
+                    data: item
+                  })}
+                >
+                  <FaEye className="text-xs" />
+                </div>
+                <div
+                  className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-lime-700 hover:border-bg-lime-700 cursor-pointer"
+                  onClick={() => {
+                    setEditId(item?.id)
+                    setNewName({
+                      ...newName,
+                      value: item?.name
+                    })
+                    setNewDesc({
+                      ...newDesc,
+                      value: item?.desc
+                    })
+                    setShowModalEdit(true)
+                  }}
+                >
+                  <FaPen className="text-xs" />
+                </div>
+                {type === 'todo' ? (
+                  <div
+                    className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-emerald-700 hover:border-bg-emerald-700 cursor-pointer"
+                    onClick={() => {
                       setConfirmAlert({
-                        ...confirmAlert,
-                        show: false,
+                        show: true,
+                        title: 'Todo',
+                        message: `Will set ${item?.name} back to todo?`,
+                        onCancel: () => {
+                          setConfirmAlert({
+                            ...confirmAlert,
+                            show: false,
+                          })
+                        },
+                        onConfirm: () => {
+                          dispatch(setTodo(item?.id))
+                          setConfirmAlert({
+                            ...confirmAlert,
+                            show: false,
+                          })
+                        }
                       })
-                    },
-                    onConfirm: () => {
-                      dispatch(setComplete(item?.id))
+                    }}
+                  >
+                    <FaCaretLeft className="text-xs" />
+                  </div>
+                ) : null}
+                {type === 'complete' ? (
+                  <div
+                    className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-emerald-700 hover:border-bg-emerald-700 cursor-pointer"
+                    onClick={() => {
                       setConfirmAlert({
-                        ...confirmAlert,
-                        show: false,
+                        show: true,
+                        title: 'Complete',
+                        message: `Will set ${item?.name} as to complete task?`,
+                        onCancel: () => {
+                          setConfirmAlert({
+                            ...confirmAlert,
+                            show: false,
+                          })
+                        },
+                        onConfirm: () => {
+                          dispatch(setComplete(item?.id))
+                          setConfirmAlert({
+                            ...confirmAlert,
+                            show: false,
+                          })
+                        }
                       })
-                    }
-                  })
-                }}
-              >
-                <FaCaretRight className="text-xs" />
+                    }}
+                  >
+                    <FaCaretRight className="text-xs" />
+                  </div>
+                ) : null}
+                <div
+                  className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-rose-700 hover:border-rose-700 cursor-pointer"
+                  onClick={() => {
+                    setConfirmAlert({
+                      show: true,
+                      title: 'Delete item',
+                      message: `Will you delete ${item?.name}?`,
+                      onCancel: () => {
+                        setConfirmAlert({
+                          ...confirmAlert,
+                          show: false,
+                        })
+                      },
+                      onConfirm: () => {
+                        dispatch(setDelete(item?.id))
+                        setConfirmAlert({
+                          ...confirmAlert,
+                          show: false,
+                        })
+                      }
+                    })
+                  }}
+                >
+                  <FaTrash className="text-xs" />
+                </div>
+                
               </div>
-            ) : null}
-            <div
-              className="w-fit h-fit p-1 rounded duration-200 border bg-white border-gray-400 text-gray-400 hover:text-white hover:bg-rose-700 hover:border-rose-700 cursor-pointer"
-              onClick={() => {
-                setConfirmAlert({
-                  show: true,
-                  title: 'Delete item',
-                  message: `Will you delete ${item?.name}?`,
-                  onCancel: () => {
-                    setConfirmAlert({
-                      ...confirmAlert,
-                      show: false,
-                    })
-                  },
-                  onConfirm: () => {
-                    dispatch(setDelete(item?.id))
-                    setConfirmAlert({
-                      ...confirmAlert,
-                      show: false,
-                    })
-                  }
-                })
-              }}
-            >
-              <FaTrash className="text-xs" />
             </div>
-            
-          </div>
-        </div>
-      )
-    })
+          )
+        })
+      } else {
+        return <div className="w-full flex justify-start items-start text-[9px] italic">No data available</div>
+      }
+    }
+    return null
   }
 
   return (
@@ -446,7 +459,7 @@ const FrontendTest1 = () => {
         ]}
       />
       <div className="w-full h-full">
-        <div className="w-full h-fit flex flex-row gap-5 px-5">
+        <div className="w-full h-fit flex flex-col laptop:flex-row gap-5 px-5">
           <div className="w-full h-full flex flex-col bg-white rounded p-5 relative">
             {renderLoader(listTodo?.isLoading || sortTask?.isLoading || deleteTask?.isLoading)}
             <div className="w-full flex flex-row justify-between items-center">
@@ -533,6 +546,13 @@ const FrontendTest1 = () => {
                   <span className="w-fit">:</span>
                 </div>
                 <span>{modalDetail?.data?.status === '1' ? 'Todo' : 'Complete'}</span>
+              </div>
+              <div className="w-full flex flex-row gap-2">
+                <div className="w-fit flex flex-row gap-2">
+                  <span className="w-[120px]">Description</span>
+                  <span className="w-fit">:</span>
+                </div>
+                <span>{modalDetail?.data?.desc}</span>
               </div>
               <div className="w-full flex flex-row gap-2">
                 <div className="w-fit flex flex-row gap-2">

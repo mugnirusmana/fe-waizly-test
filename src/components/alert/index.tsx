@@ -28,8 +28,8 @@ const Alert = ({show, title, message, type, withConfirm, cancelLabel, onCancel, 
   }
 
   return (
-    <div className={`w-full h-full fixed duration-300 ${show ? 'top-0' : 'top-[3000px]'} left-0 flex items-center justify-center backdrop-blur-sm z-[1000]`}>
-      <div className="w-1/3 h-fit p-5 bg-white rounded border border-gray-200 shadow-lg flex flex-col items-center gap-2">
+    <div className={`w-full h-full fixed duration-300 px-5 ${show ? 'top-0' : 'top-[3000px]'} left-0 flex items-center justify-center backdrop-blur-sm z-[1000]`}>
+      <div className="w-full tablet:w-[60%] laptop:w-1/3 h-fit p-5 bg-white rounded border border-gray-200 shadow-lg flex flex-col items-center gap-2">
         {renderType()}
         <span className=" text-center font-bold">{title}</span>
         <span className="mb-10 text-xs text-center">{message}</span>

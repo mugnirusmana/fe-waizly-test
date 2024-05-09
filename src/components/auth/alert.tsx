@@ -7,8 +7,8 @@ interface Type {
 
 const Alert = ({show, title, message, onCancel}: Type) => {
   return (
-    <div className={`w-full h-full absolute duration-500 ${!show ? 'top-[-2500px]' : `top-[0px]`} left-0 flex items-center justify-center backdrop-blur text-base`}>
-      <div className="w-1/3 h-fit flex flex-col bg-white rounded p-10 text-black items-center gap-5">
+    <div className={`w-full h-full absolute duration-500 px-5 ${!show ? 'top-[-2500px]' : `top-[0px]`} left-0 flex items-center justify-center backdrop-blur text-base`}>
+      <div className="w-full tablet:w-[60%] laptop:w-1/3 h-fit flex flex-col bg-white rounded p-10 text-black items-center gap-5">
         <span className="font-bold text-center">{title??''}</span>
         <span className="mb-10 text-xs text-center">{message??''}</span>
         <div

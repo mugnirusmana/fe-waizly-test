@@ -75,8 +75,9 @@ const BasicTest3 = () => {
           />
 
           <div className="w-full flex flex-row gap-2 pb-2">
-            <div className="w-full" />
+            <div className="w-[300%] hidden tablet:flex" />
             <Button
+              full
               type="reset"
               label="Reset"
               onClick={() => {
@@ -94,6 +95,7 @@ const BasicTest3 = () => {
             />
 
             <Button
+              full
               type="submit"
               label="Calculate"
               onClick={() => {
