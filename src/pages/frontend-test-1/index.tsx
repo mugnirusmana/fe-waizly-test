@@ -130,6 +130,12 @@ const FrontendTest1 = () => {
       setShowModalAdd(false)
       resetModalAdd()
       dispatch(getTodo({status: '1', keyword: keywordTodo?.value}))
+      setGlobalAlert({
+        show: true,
+        title: 'Create',
+        message: 'Data successfully created',
+        type: 'success'
+      })
     }
 
     if (!isLoading && isError) {
