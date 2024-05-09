@@ -106,14 +106,23 @@ const FrontendTest1 = () => {
       data,
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage,
     } = listTodo
     
     if (!isLoading && isSuccess) {
       setDataTodo(data)
       dispatch(setDefaultTodo())
+    }
+
+    if (!isLoading && isError) {
+      dispatch(setDefaultTodo())
+      setGlobalAlert({
+        show: true,
+        title: 'Get List Todo',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
     }
   }, [listTodo])
 
@@ -122,6 +131,7 @@ const FrontendTest1 = () => {
       isLoading,
       isSuccess,
       isError,
+      errorMessage,
       errorMeta
     } = createTask
 
@@ -150,6 +160,12 @@ const FrontendTest1 = () => {
 				errorMessage: errorMeta?.error?.description??''
 			})
       dispatch(setDefaultCreateTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Create',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
     }
   }, [createTask])
 
@@ -158,6 +174,7 @@ const FrontendTest1 = () => {
       isLoading,
       isSuccess,
       isError,
+      errorMessage,
       errorMeta
     } = editTask
 
@@ -187,6 +204,12 @@ const FrontendTest1 = () => {
 				errorMessage: errorMeta?.error?.description??''
 			})
       dispatch(setDefaultEditTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Edit',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
     }
   }, [editTask])
 
@@ -195,14 +218,23 @@ const FrontendTest1 = () => {
       data,
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage
     } = listComplete
     
     if (!isLoading && isSuccess) {
       setDataComplete(data)
       dispatch(setDefaultComplete())
+    }
+
+    if (!isLoading && isError) {
+      dispatch(setDefaultComplete())
+      setGlobalAlert({
+        show: true,
+        title: 'Get List Complete',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
     }
   }, [listComplete])
   
@@ -210,9 +242,8 @@ const FrontendTest1 = () => {
     let {
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage
     } = sortTask
     
     if (!isLoading && isSuccess) {
@@ -220,15 +251,24 @@ const FrontendTest1 = () => {
       dispatch(getTodo({status: '1', keyword: keywordTodo?.value}))
       dispatch(getComplete({status: '2', keyword: keywordComplete?.value}))
     }
+
+    if (!isLoading && isError) {
+      dispatch(setDefaultSortTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Get List Complete',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
+    }
   }, [sortTask])
 
   useEffect(() => {
     let {
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage
     } = deleteTask
     
     if (!isLoading && isSuccess) {
@@ -249,15 +289,31 @@ const FrontendTest1 = () => {
         type: 'success'
       })
     }
+
+    if (!isLoading && isError) {
+      setConfirmAlert({
+        show: false,
+        message: '',
+        title: '',
+        onCancel: () => {},
+        onConfirm: () => {}
+      })
+      dispatch(setDefaultDeleteTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Delete',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
+    }
   }, [deleteTask])
 
   useEffect(() => {
     let {
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage
     } = todoTask
     
     if (!isLoading && isSuccess) {
@@ -278,15 +334,31 @@ const FrontendTest1 = () => {
         type: 'success'
       })
     }
+
+    if (!isLoading && isError) {
+      setConfirmAlert({
+        show: false,
+        message: '',
+        title: '',
+        onCancel: () => {},
+        onConfirm: () => {}
+      })
+      dispatch(setDefaultTodoTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Todo',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
+      })
+    }
   }, [todoTask])
 
   useEffect(() => {
     let {
       isLoading,
       isSuccess,
-      // isError,
-      // errorMessage,
-      // errorMeta
+      isError,
+      errorMessage
     } = completeTask
     
     if (!isLoading && isSuccess) {
@@ -302,9 +374,26 @@ const FrontendTest1 = () => {
       dispatch(setDefaultCompleteTask())
       setGlobalAlert({
         show: true,
-        title: 'Todo',
+        title: 'Complete',
         message: 'Data successfully updated',
         type: 'success'
+      })
+    }
+
+    if (!isLoading && isError) {
+      setConfirmAlert({
+        show: false,
+        message: '',
+        title: '',
+        onCancel: () => {},
+        onConfirm: () => {}
+      })
+      dispatch(setDefaultCompleteTask())
+      setGlobalAlert({
+        show: true,
+        title: 'Complete',
+        message: errorMessage??'Someting went wrong',
+        type: 'error'
       })
     }
   }, [completeTask])
