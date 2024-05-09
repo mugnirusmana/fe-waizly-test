@@ -3,11 +3,11 @@ import { TASK } from "../services"
 import { setErrorAxios } from "../config/helper"
 
 interface Props {
-    isLoading: boolean
-    isError: boolean
-    isSuccess: boolean
-    errorMessage?: string | null,
-    errorMeta: any
+  isLoading: boolean
+  isError: boolean
+  isSuccess: boolean
+  errorMessage?: string | null
+  errorMeta: any
 }
 
 const initialState: Props = {
@@ -18,29 +18,29 @@ const initialState: Props = {
   errorMeta: {}
 }
 
-export const listTaskSlice = createSlice({
-  name: "sortTask",
+export const slice = createSlice({
+  name: "editTask",
   initialState,
   reducers: {
-    reducerSortTaskDefault: (state: Props) => {
+    reducerEditTaskDefault: (state: Props) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
     },
-    reducerSortTask: (state: Props) => {
+    reducerEditTask: (state: Props) => {
       state.isLoading = true
       state.isSuccess = false
       state.isError = false
       state.errorMessage = null
       state.errorMeta = {}
     },
-    reducerSortTaskSuccess: (state: Props) => {
+    reducerEditTaskSuccess: (state: Props) => {
       state.isLoading = false
       state.isSuccess = true
       state.isError = false
       state.errorMessage = null
     },
-    reducerSortTaskFailed: (state: Props, { payload }) => {
+    reducerEditTaskFailed: (state: Props, { payload }) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = true
@@ -51,31 +51,31 @@ export const listTaskSlice = createSlice({
 })
 
 const {
-  reducerSortTaskDefault,
-  reducerSortTask,
-  reducerSortTaskSuccess,
-  reducerSortTaskFailed
-} = listTaskSlice.actions
+  reducerEditTaskDefault,
+  reducerEditTask,
+  reducerEditTaskSuccess,
+  reducerEditTaskFailed
+} = slice.actions
 
-export const setDefaultSortTask = () => {
+export const setDefaultEditTask = () => {
   return async (dispatch: Function) => {
-    return dispatch(reducerSortTaskDefault())
+    return dispatch(reducerEditTaskDefault())
   }
 }
 
-export const setSort = (params: any) => {
+export const setEdit = (params: any, id: any) => {
   return async (dispatch: Function) => {
-    dispatch(reducerSortTask())
-    TASK.sort(params)
+    dispatch(reducerEditTask())
+    TASK.edit(params, id)
       .then((response) => {
         if (response?.data?.meta?.is_success) {
-          dispatch(reducerSortTaskSuccess())
+          dispatch(reducerEditTaskSuccess())
         } else {
-          dispatch(reducerSortTaskFailed(setErrorAxios(response)))
+          dispatch(reducerEditTaskFailed(setErrorAxios(response)))
         }
       })
-      .catch((error) => dispatch(reducerSortTaskFailed(setErrorAxios(error?.response))))
+      .catch((error) => dispatch(reducerEditTaskFailed(setErrorAxios(error?.response))))
   }
 }
 
-export default listTaskSlice.reducer
+export default slice.reducer

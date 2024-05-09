@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { TASK } from "../services"
-import { setSuccessAxios, setErrorAxios } from "../config/helper"
+import { setErrorAxios } from "../config/helper"
 
 interface Props {
   isLoading: boolean

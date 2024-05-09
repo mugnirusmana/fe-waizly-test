@@ -53,59 +53,6 @@ const Dashboard = ({ children }: Props) => {
       ]
     },
     {
-      title: 'Backend 1',
-      icon: <FaDatabase />,
-      route: null,
-      active: false,
-    },
-    {
-      title: 'Backend 2',
-      icon: <FaDatabase />,
-      active: false,
-      showChildrens: false,
-      childrens: [
-        {
-          title: 'Test 1',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 2',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 3',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 4',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 5',
-          route: null
-        },
-        {
-          title: 'Test 6',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 7',
-          route: null,
-          active: false,
-        },
-        {
-          title: 'Test 8',
-          route: null,
-          active: false,
-        }
-      ]
-    },
-    {
       title: 'Frontend 1',
       icon: <FaDatabase />,
       route: '/frontend-test-1',

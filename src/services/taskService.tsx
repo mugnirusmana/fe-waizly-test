@@ -36,3 +36,48 @@ export const sort = (data: any) => {
     },
   })
 }
+
+export const complete = (params: any) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/fe-test-1/complete/${params}`, {
+    headers: {
+      'Authorization': token
+    }
+  })
+}
+
+export const todo = (params: any) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/fe-test-1/todo/${params}`, {
+    headers: {
+      'Authorization': token
+    }
+  })
+}
+
+export const detail = (params: any) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/fe-test-1/detail/${params}`, {
+    headers: {
+      'Authorization': token
+    }
+  })
+}
+
+export const edit = (params: any, id: any) => {
+  const token = localStorage.getItem('token')
+  return axios.post(`${ENV.API}/fe-test-1/edit/${id}`, params, {
+    headers: {
+      'Authorization': token
+    },
+  })
+}
+
+export const remove = (params: any) => {
+  const token = localStorage.getItem('token')
+  return axios.delete(`${ENV.API}/fe-test-1/delete/${params}`, {
+    headers: {
+      'Authorization': token
+    }
+  })
+}
