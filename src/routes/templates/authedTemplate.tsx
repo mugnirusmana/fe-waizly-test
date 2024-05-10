@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { logOut } from "./../../redux/authSlice"
 import { RootState } from "../../config/root-reducer"
 
+import { useOutsideClick } from "./../../config/hooks"
+
 interface Props {
   children: ReactNode
 }
@@ -53,12 +55,36 @@ const Dashboard = ({ children }: Props) => {
       ]
     },
     {
+      title: 'Backend',
+      icon: <FaFile />,
+      active: false,
+      showChildrens: false,
+      childrens: [
+        {
+          title: 'Test 1',
+          route: '/backend-test-1',
+          active: false,
+        }
+      ]
+    },
+    {
       title: 'Frontend 1',
       icon: <FaDatabase />,
       route: '/frontend-test-1',
       active: false,
     }
   ])
+
+  const handleClickHideMenu = () => {
+    setShowMenu(false)
+  }
+
+  const handleClickHideSetting = () => {
+    setShowSetting(false)
+  }
+
+  const menuRefs = useOutsideClick(handleClickHideMenu)
+  const settingRefs = useOutsideClick(handleClickHideSetting)
 
   useEffect(() => {
     let url: any = window.location.pathname
@@ -187,40 +213,42 @@ const Dashboard = ({ children }: Props) => {
   }
 
   return (
-    <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll relative text-gray-700">
-      <div
-        className={`fixed w-[45px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-[500] flex items-center`}
-        onClick={() => setShowMenu(!showMenu)}
-      >
-        <div className="w-full h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
-          <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'top-[27px] rotate-45' : 'top-5 rotate-0'}`}></div>
-          <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
-        </div>
-      </div>
-      <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-[500]`}>
-        <div className="w-full flex flex-col gap-5 relative">
-          <span className="w-full flex items-center justify-center text-2xl text-center p-5">Waizly<strong>Test</strong></span>
-
-          <div className="w-full flex flex-col items-center justify-center gap-2 px-5">
-            <img
-              src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
-              alt="profile"
-              className="w-[60px] h-[60px] object-cover rounded-full border-2 border-gray-200"
-            />
-            <span className="text-sm text-center">{auth?.data?.name}</span>
+    <div className="flex flex-row w-screen h-screen bg-gray-200 overflow-y-scroll hide-scroll text-gray-700">
+      <div className="flex w-fit relative" ref={menuRefs}>
+        <div
+          className={`fixed w-[45px] h-[60px] top-0 cursor-pointer duration-300 ${showMenu ? 'left-[250px]' : 'left-[0px]'} z-[500] flex items-center`}
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <div className="w-full h-[60px] flex items-center bg-gray-700 py-3 rounded-tr-md rounded-br-md relative" >
+            <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'top-[27px] rotate-45' : 'top-5 rotate-0'}`}></div>
+            <div className={`w-[30px] h-[6px] rounded bg-white duration-300 absolute left-[7px] ${showMenu ? 'bottom-[27px] -rotate-45' : 'bottom-5 rotate-0'}`}></div>
           </div>
+        </div>
+        <div className={`w-[250px] h-full bg-gray-700 text-white flex flex-col text-base overflow-y-scroll hide-scroll fixed duration-300 ${showMenu ? 'left-[0]' : 'left-[-250px]'} top-0 z-[500]`}>
+          <div className="w-full flex flex-col gap-5 relative">
+            <span className="w-full flex items-center justify-center text-2xl text-center p-5">Waizly<strong>Test</strong></span>
 
-          <div className="w-full h-full flex flex-col gap-4 text-base text-gray-500 font-bold">
-            <span className="text-gray-600 text-xs">--- MENU</span>
-            {renderMenu()}
-            <span className="w-full min-h-[10px]"></span>
+            <div className="w-full flex flex-col items-center justify-center gap-2 px-5">
+              <img
+                src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
+                alt="profile"
+                className="w-[60px] h-[60px] object-cover rounded-full border-2 border-gray-200"
+              />
+              <span className="text-sm text-center">{auth?.data?.name}</span>
+            </div>
+
+            <div className="w-full h-full flex flex-col gap-4 text-base text-gray-500 font-bold">
+              <span className="text-gray-600 text-xs border-b-2 border-b-gray-600"></span>
+              {renderMenu()}
+              <span className="w-full min-h-[10px]"></span>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="w-full h-full flex flex-col">
         <div className="w-full min-h-[60px] bg-[#ffbc79] fixed top-0 flex flex-row pr-5 items-center justify-end text-xs z-[30]">
-          <div className="w-fit h-fit relative">
+          <div ref={settingRefs} className="w-fit h-fit relative">
             <img
               src="https://cdn.vectorstock.com/i/1000x1000/01/38/young-man-profile-vector-14770138.webp"
               alt="profile"

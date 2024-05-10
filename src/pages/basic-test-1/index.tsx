@@ -18,9 +18,9 @@ const BasicTest1 = () => {
   })
   const [resultData, setResultData] = useState<any>([])
 
-  const sumResultExcept = (item: any) => {
+  const sumResultExcept = (index: number) => {
     let total = 0
-    resultData?.forEach((item_r: any) => item_r !== item ? total += item_r : {})
+    resultData?.forEach((item_r: any, index_r: any) => index_r !== index ? total += item_r : {})
     return total
   }
 
@@ -58,7 +58,7 @@ const BasicTest1 = () => {
           {resultData?.map((item: any, index: number) => {
             return (
               <div key={index} className="w-full flex flex-row gap-2">
-                <span>Sum <strong>{resultString}</strong> Except <strong>{item}</strong> = <strong>{sumResultExcept(item)}</strong></span>
+                <span>Sum <strong>{resultString}</strong> Except <strong>{item}</strong> = <strong>{sumResultExcept(index)}</strong></span>
               </div>
             )
           })}
@@ -77,8 +77,8 @@ const BasicTest1 = () => {
           { title: 'Test 1', route: '', active: true }
         ]}
       />
-      <div className="w-full h-full px-5">
-        <div className="w-full h-full rounded bg-white p-5">
+      <div className="w-full h-fit px-5">
+        <div className="w-full h-fit rounded bg-white p-5 pb-14">
           <Input
             label="Input data"
             name={"input"}

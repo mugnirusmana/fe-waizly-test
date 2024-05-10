@@ -122,6 +122,7 @@ const Input = ({
           className={`w-full px-2 py-2 text-xs outline-none bg-transparent duration-300 ${isError ? 'text-red-300 placeholder:text-red-300' : 'text-white placeholder:text-white'}`}
           onChange={(e: any) => setValidate(e?.target?.value)}
           value={value??""}
+          autoComplete={"new-password"}
         />
         {renderClearText()}
         {renderIcon()}

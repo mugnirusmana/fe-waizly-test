@@ -3,6 +3,7 @@ import Dashboard from "./../pages/dashboard"
 import BasicTest1 from "./../pages/basic-test-1"
 import BasicTest2 from "./../pages/basic-test-2"
 import BasicTest3 from "./../pages/basic-test-3"
+import BackendTest1 from "./../pages/backend-test-1"
 import FrontEndTest1 from "./../pages/frontend-test-1"
 
 import Login from "./../pages/login"
@@ -11,7 +12,7 @@ import Register from "./../pages/register"
 import Home from "./../pages/home"
 
 interface TypeObject {
-	path: string
+	path?: string
 	component?: any
 }
 
@@ -37,6 +38,10 @@ const AuthedRoute: TypesArray = [
 	{
 		path: "/basic-test-3",
 		component: BasicTest3,
+	},
+	{
+		path: "/backend-test-1",
+		component: BackendTest1,
 	},
 	{
 		path: '/frontend-test-1',
