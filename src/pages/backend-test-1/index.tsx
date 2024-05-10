@@ -1,5 +1,6 @@
 import Breadcrumb from "./../../components/breadcrumb"
 import Table from "./../../components/table"
+import Loader from "./../../components/loader"
 
 const BackendTest1 = () => {
   return (
@@ -138,6 +139,8 @@ const BackendTest1 = () => {
         </div>
         <div className="w-full h-[40px]"></div>
       </div>
+
+      <Loader />
     </div>
   )
 }

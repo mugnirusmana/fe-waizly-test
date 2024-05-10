@@ -680,7 +680,7 @@ const FrontendTest1 = () => {
           <Button
             label="X"
             type="reset"
-            customClass={'absolute top-0 right-0 rounded-full text-xs'}
+            customClass={'absolute top-0 right-0 rounded-full w-[20px] h-[33px] p-[0px] text-xs'}
             onClick={() => {
               resetModalAdd()
               setShowModalAdd(false)
@@ -749,7 +749,7 @@ const FrontendTest1 = () => {
           <Button
             label="X"
             type="reset"
-            customClass={'absolute top-0 right-0 rounded-full text-xs'}
+            customClass={'absolute top-0 right-0 rounded-full w-[20px] h-[33px] p-[0px] text-xs'}
             onClick={() => {
               setEditId('')
               resetModalAdd()

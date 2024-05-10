@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { FaAngleDoubleLeft } from "@react-icons/all-files/fa/FaAngleDoubleLeft"
 import { FaAngleDoubleRight } from "@react-icons/all-files/fa/FaAngleDoubleRight"
 
-import { useOutsideClick } from "./../../config/hooks"
+import { useOutsideClick, useWindowSize } from "./../../config/hooks"
 
 import Select from "./select"
 import Button from "./button"
@@ -50,6 +50,7 @@ const Table = ({
   onGoToPage,
 }: Props) => {
   const refWidthParent = useRef<any>()
+  const windowSize = useWindowSize()
   const [maxWidthPerTitle, setMaxWidthPerTitle] = useState(0)
   const [showPerPage, setShowPerPage] = useState(false)
   const [showListPage, setShowListPage] = useState(false)
@@ -68,6 +69,10 @@ const Table = ({
   useEffect(() => {
     setWithTitle()
   }, [])
+
+  useEffect(() => {
+    setWithTitle()
+  }, [windowSize])
 
   const setWithTitle = () => {
     let width = refWidthParent?.current?.offsetWidth
@@ -112,7 +117,7 @@ const Table = ({
     if (data && data?.length > 0 && titles && titles?.length > 0) {
       return data?.map((item: any, index: number) => {
         return (
-          <div key={index} className={`w-full laptop:w-fit flex flex-col rounded laptop:rounded-none laptop:flex-row gap-2 ${index === 0 ? 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t-0' : 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t laptop:border-t-gray-100'} hover:bg-gray-100`}>
+          <div key={index} className={`w-full laptop:w-fit flex flex-col rounded laptop:rounded-none laptop:flex-row gap-2 ${index === 0 ? 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t-0' : 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t laptop:border-t-gray-100'} laptop:hover:bg-gray-100`}>
             {withNo ? renderNumber(index + 1) : null}
             {renderData(item, index)}
             {withAction ? renderActionContent(item) : null}
@@ -126,7 +131,7 @@ const Table = ({
   const renderNumber = (no: number) => {
     let number: any = ((currentPage * totalPage) - totalPage) + no
     return <div className="w-full laptop:min-w-[30px] laptop:w-[30px] laptop:max-w-[30px] laptop:py-2 laptop:px-1 flex flex-row laptop:justify-center text-center">
-      <div className="w-full bg-gray-400 laptop:hidden flex justify-center p-1 rounded-tl rounded-tr font-bold">No. {number}</div>
+      <div className="w-full bg-gray-400 laptop:hidden flex justify-center p-1 rounded-tl-sm rounded-tr-sm font-bold text-white">No. {number}</div>
       <span className="w-fit hidden laptop:flex items-center font-bold">{number}</span>
     </div>
   }
@@ -178,6 +183,65 @@ const Table = ({
     })
   }
 
+  const renderPageContent = () => {
+    if (totalPage > 0 && (pages?.length??0) > 0) {
+      return (
+        <div className="w-full flex flex-col laptop:flex-row gap-5 mt-2 border-t border-t-gray-400 pt-2">
+          <div className="w-full h-fit flex flex-row justify-center laptop:justify-start gap-1 whitespace-nowrap">Showing <strong>{data?.length??0}</strong> of  <strong>{totalData??0}</strong></div>
+          <div className="w-full h-fit flex flex-col items-center laptop:flex-row laptop:justify-end gap-7">
+            <div className="w-fit flex flex-col items-center">
+              <div>Per Page</div>
+              <Select
+                show={showPerPage}
+                ref={perpageRefs}
+                onClick={(status: boolean) => setShowPerPage(status)}
+                selectItem={perPage}
+                onChange={(data: any) => {
+                  if(onChangePerPage) {
+                    onChangePerPage(data)
+                    setShowPerPage(false)
+                  }
+                }}
+                data={[5,10,50,100]}
+              />
+            </div>
+            <div className="w-fit flex flex-row gap-2 items-center">
+              <Button
+                icon={<FaAngleDoubleLeft />}
+                onClick={() => onPrevPage ? onPrevPage(currentPage - 1) : {}}
+                disabled={currentPage <= 1}
+              />
+            </div>
+            <div className="w-fit flex flex-col items-center">
+              <div>Go to Page</div>
+              <Select
+                ref={listpageRefs}
+                show={showListPage}
+                withSearch={true}
+                onClick={(status: boolean) => setShowListPage(status)}
+                selectItem={currentPage}
+                onChange={(data: any) => {
+                  if (onGoToPage) {
+                    onGoToPage(data)
+                    setShowListPage(false)
+                  }
+                }}
+                data={pages}
+              />
+            </div>
+            <div className="w-fit flex flex-row gap-2 items-center">
+              <Button
+                icon={<FaAngleDoubleRight />}
+                onClick={() => onNextPage ? onNextPage(currentPage + 1) : {}}
+                disabled={currentPage >= totalPage}
+              />
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
   return (
     <div ref={refWidthParent} className="w-full h-fit rounded text-sm">
       <div className="w-full flex flex-col overflow-x-scroll hide-scroll laptop:border laptop:border-gray-400 gap-2 laptop:gap-0 rounded">
@@ -185,58 +249,7 @@ const Table = ({
         {renderDataContent()}
         {withFooter ? renderTitleContent('border-t border-t-gray-400') : null}
       </div>
-      <div className="w-full flex flex-col laptop:flex-row gap-5 py-2">
-        <div className="w-full h-fit flex flex-row justify-center laptop:justify-start gap-1 whitespace-nowrap">Showing <strong>{data?.length??0}</strong> of  <strong>{totalData??0}</strong></div>
-        <div className="w-full h-fit flex flex-col items-center laptop:flex-row laptop:justify-end gap-7">
-          <div className="w-fit flex flex-col items-center">
-            <div>Per Page</div>
-            <Select
-              show={showPerPage}
-              ref={perpageRefs}
-              onClick={(status: boolean) => setShowPerPage(status)}
-              selectItem={perPage}
-              onChange={(data: any) => {
-                if(onChangePerPage) {
-                  onChangePerPage(data)
-                  setShowPerPage(false)
-                }
-              }}
-              data={[5,10,50,100]}
-            />
-          </div>
-          <div className="w-fit flex flex-row gap-2 items-center">
-            <Button
-              icon={<FaAngleDoubleLeft />}
-              onClick={() => onPrevPage ? onPrevPage(currentPage - 1) : {}}
-              disabled={currentPage <= 1}
-            />
-          </div>
-          <div className="w-fit flex flex-col items-center">
-            <div>Go To Page</div>
-            <Select
-              ref={listpageRefs}
-              show={showListPage}
-              withSearch={true}
-              onClick={(status: boolean) => setShowListPage(status)}
-              selectItem={currentPage}
-              onChange={(data: any) => {
-                if (onGoToPage) {
-                  onGoToPage(data)
-                  setShowListPage(false)
-                }
-              }}
-              data={pages}
-            />
-          </div>
-          <div className="w-fit flex flex-row gap-2 items-center">
-            <Button
-              icon={<FaAngleDoubleRight />}
-              onClick={() => onNextPage ? onNextPage(currentPage + 1) : {}}
-              disabled={currentPage >= totalPage}
-            />
-          </div>
-        </div>
-      </div>
+      {renderPageContent()}
     </div>
   )
 }
