@@ -21,10 +21,7 @@ interface Props {
   withFooter?: boolean
   data?: Array<any>
   perPage?: number | null | undefined
-  pages?: Array<{
-    active?: boolean,
-    value?: string | number
-  }>
+  pages?: Array<any>
   currentPage: number
   totalPage: number
   totalData?: string | number | null | undefined
@@ -216,7 +213,7 @@ const Table = ({
               />
             </div>
             <div className="w-fit flex flex-col items-center">
-              <div>Go to Page</div>
+              <div>Select Page</div>
               <Select
                 ref={listpageRefs}
                 show={showListPage}

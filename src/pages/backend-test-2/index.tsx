@@ -8,10 +8,14 @@ import { RootDispatch, RootState } from "../../config/store"
 import { getBeTest2, setDefaultBeTest2 } from './../../redux/beTest2'
 
 import Select from "../../components/select"
-import Input from "../../components/input"
+import Alert from "../../components/alert"
 
 const BackendTest2 = () => {
   const [jobTitle, setJobTitle] = useState('Manager')
+  const [globalAlert, setGlobalAlert] = useState({
+    show: false,
+    message: '',
+  })
 
   const { beTest2 } = useSelector((state: RootState) => state)
   const dispatch = useDispatch<RootDispatch>()
@@ -23,11 +27,20 @@ const BackendTest2 = () => {
   useEffect(() => {
     let {
       isSuccess,
-      isLoading
+      isLoading,
+      isError,
+      errorMessage
     } = beTest2
 
     if (!isLoading && isSuccess) {
       dispatch(setDefaultBeTest2())
+    }
+
+    if (!isLoading && isError) {
+      setGlobalAlert({
+        show: true,
+        message: errorMessage??'Someting went wrong'
+      })
     }
   }, [beTest2])
 
@@ -49,7 +62,7 @@ const BackendTest2 = () => {
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
-          <div className="w-full flex flex-col mb-2">
+          <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
             <div className="w-full laptop:w-1/3 flex flex-row gap-2">
               <Select
@@ -63,7 +76,10 @@ const BackendTest2 = () => {
               />
             </div>
           </div>
-          {beTest2?.data?.job_title ? (
+        </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5">
+          {beTest2?.data?.data?.length > 0 ? (
             <div className="w-full flex flex-col border border-gray-400 rounded p-2 text-sm">
               <div className="flex flex-row">
                 <span className="w-[80px]">Job Title</span>
@@ -76,11 +92,31 @@ const BackendTest2 = () => {
                 <span className="w-[10px]">:</span>
                 <span><strong>{beTest2?.data?.total}</strong></span>
               </div>
+              <div className="flex flex-row">
+                <span className="w-[80px]">Data</span>
+                <span className="w-[10px]">:</span>
+                <span><strong>{beTest2?.data?.data?.map((item: any, index: number) => index === 0 ? `${item?.name}, ` : item?.name)}</strong></span>
+              </div>
             </div>
-          ) : null}
+          ) : (
+            <div className="w-full italic text-xs border border-gray-400 rounded p-2">No data available for {jobTitle}</div>
+          )}
         </div>
         <div className="w-full h-[40px]"></div>
       </div>
+
+      <Alert
+        show={globalAlert?.show}
+        title={'Get Data'}
+        message={globalAlert?.message}
+        type={'error'}
+        onCancel={() => {
+          setGlobalAlert({
+            ...globalAlert,
+            show: false,
+          })
+        }}
+      />
 
       <Loader show={beTest2?.isLoading} />
     </div>

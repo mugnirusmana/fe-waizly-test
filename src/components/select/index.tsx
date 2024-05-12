@@ -44,14 +44,20 @@ const Select = ({
     if (data && data?.length > 0) {
       return data?.map((item: any, index: number) => {
         let val = item
-        if (itemKey) val = item[itemKey]
+        let selectItem = value
+        if (itemKey) {
+          val = item[itemKey]
+          selectItem = value[itemKey]
+        }
         return <span
           key={index}
-          className="cursor-pointer p-2 rounded hover:bg-gray-700 hover:text-white"
+          className={`p-2 rounded hover:bg-gray-700 hover:text-white ${val === selectItem ? 'bg-gray-700 text-white cursor-default' : 'cursor-pointer'}`}
           onClick={() => {
             if (onChange) {
-              setShow(false)
-              return onChange(item)
+              if (val !== selectItem) {
+                setShow(false)
+                return onChange(item)
+              }
             }
           }}
         >{val}</span>

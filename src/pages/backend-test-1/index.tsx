@@ -76,7 +76,7 @@ const BackendTest1 = () => {
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
-          <div className="w-full flex flex-col mb-2">
+          <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
             <div className="w-full laptop:w-1/3">
               <Input
@@ -87,6 +87,8 @@ const BackendTest1 = () => {
               />
             </div>
           </div>
+        </div>
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <Table
             titles={[
               {

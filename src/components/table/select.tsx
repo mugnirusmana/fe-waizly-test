@@ -32,6 +32,10 @@ const Select = React.forwardRef(({
   }, [])
 
   useEffect(() => {
+    setListData(data)
+  }, [data])
+
+  useEffect(() => {
     let list: Array<any>|null|undefined = []
     if (search && search !== "" && search !== '') {
       data?.forEach((item: any) => {
