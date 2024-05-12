@@ -50,15 +50,15 @@ const BackendTest1 = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      getData()
+      getData(1)
     }, 500)
 
     return () => clearTimeout(delayDebounceFn)
   }, [keyword])
 
-  const getData = () => {
+  const getData = (selectPage?: number) => {
     let params = {
-      page: page,
+      page: selectPage??page,
       limit: limit,
       keyword: keyword?.value
     }
