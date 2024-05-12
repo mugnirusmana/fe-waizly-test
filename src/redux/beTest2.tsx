@@ -14,7 +14,7 @@ interface Props {
 interface ParamsListProps {
   page?: string | number
   limit?: string | number
-  keyword?: string | null | undefined
+  job_title?: string | null | undefined
 }
 
 const initialState: Props = {
@@ -27,29 +27,29 @@ const initialState: Props = {
 }
 
 export const slice = createSlice({
-  name: "beTest1",
+  name: "beTest2",
   initialState,
   reducers: {
-    reducerBeTest1Default: (state: Props) => {
+    reducerBeTest2Default: (state: Props) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
     },
-    reducerBeTest1: (state: Props) => {
+    reducerBeTest2: (state: Props) => {
       state.isLoading = true
       state.isSuccess = false
       state.isError = false
       state.errorMessage = null
       state.errorMeta = {}
     },
-    reducerBeTest1Success: (state: Props, { payload }) => {
+    reducerBeTest2Success: (state: Props, { payload }) => {
       state.isLoading = false
       state.isSuccess = true
       state.isError = false
       state.errorMessage = null
       state.data = payload
     },
-    reducerBeTest1Failed: (state: Props, { payload }) => {
+    reducerBeTest2Failed: (state: Props, { payload }) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = true
@@ -60,30 +60,32 @@ export const slice = createSlice({
 })
 
 const {
-  reducerBeTest1Default,
-  reducerBeTest1,
-  reducerBeTest1Success,
-  reducerBeTest1Failed
+  reducerBeTest2Default,
+  reducerBeTest2,
+  reducerBeTest2Success,
+  reducerBeTest2Failed
 } = slice.actions
 
-export const setDefaultBeTest1 = () => {
+export const setDefaultBeTest2 = () => {
   return async (dispatch: Dispatch) => {
-    return dispatch(reducerBeTest1Default())
+    return dispatch(reducerBeTest2Default())
   }
 }
 
-export const getBeTest1 = (params: ParamsListProps) => {
+export const getBeTest2 = (params: ParamsListProps) => {
   return async (dispatch: Dispatch) => {
-    dispatch(reducerBeTest1())
-    TESTBE.test1(params)
+    dispatch(reducerBeTest2())
+    TESTBE.test2(params)
       .then((response) => {
         if (response?.data?.meta?.is_success) {
-          dispatch(reducerBeTest1Success(setSuccessAxios(response)))
+          setTimeout(() => {
+            dispatch(reducerBeTest2Success(setSuccessAxios(response)))
+          }, 1000)
         } else {
-          dispatch(reducerBeTest1Failed(setErrorAxios(response)))
+          dispatch(reducerBeTest2Failed(setErrorAxios(response)))
         }
       })
-      .catch((error) => dispatch(reducerBeTest1Failed(setErrorAxios(error?.response))))
+      .catch((error) => dispatch(reducerBeTest2Failed(setErrorAxios(error?.response))))
   }
 }
 

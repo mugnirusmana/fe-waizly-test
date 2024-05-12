@@ -17,3 +17,20 @@ export const test1 = (params: test1Type) => {
     params: params
   })
 }
+
+
+interface test2Type {
+  page?: string | number
+  limit?: string | number
+  job_title?: string | null | undefined
+}
+
+export const test2 = (params: test2Type) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/be-test-2/test-2`, {
+    headers: {
+      Authorization: token
+    },
+    params: params
+  })
+}

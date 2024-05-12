@@ -118,8 +118,6 @@ const Table = ({
 
   const renderDataContent = () => {
     if (data && data?.length > 0 && titles && titles?.length > 0) {
-      console.log('======================= ')
-      console.log('data ', data)
       return data?.map((item: any, index: number) => {
         return (
           <div key={index} className={`w-full laptop:w-fit flex flex-col rounded laptop:rounded-none laptop:flex-row gap-2 ${index === 0 ? 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t-0' : 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t laptop:border-t-gray-100'} laptop:hover:bg-gray-100`}>

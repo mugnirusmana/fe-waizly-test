@@ -4,6 +4,7 @@ import BasicTest1 from "./../pages/basic-test-1"
 import BasicTest2 from "./../pages/basic-test-2"
 import BasicTest3 from "./../pages/basic-test-3"
 import BackendTest1 from "./../pages/backend-test-1"
+import BackendTest2 from "./../pages/backend-test-2"
 import FrontEndTest1 from "./../pages/frontend-test-1"
 
 import Login from "./../pages/login"
@@ -42,6 +43,10 @@ const AuthedRoute: TypesArray = [
 	{
 		path: "/backend-test-1",
 		component: BackendTest1,
+	},
+	{
+		path: "/backend-test-2",
+		component: BackendTest2,
 	},
 	{
 		path: '/frontend-test-1',

@@ -55,7 +55,7 @@ const Dashboard = ({ children }: Props) => {
       ]
     },
     {
-      title: 'Backend',
+      title: 'Backend 2',
       icon: <FaFile />,
       active: false,
       showChildrens: false,
@@ -63,6 +63,41 @@ const Dashboard = ({ children }: Props) => {
         {
           title: 'Test 1',
           route: '/backend-test-1',
+          active: false,
+        },
+        {
+          title: 'Test 2',
+          route: '/backend-test-2',
+          active: false,
+        },
+        {
+          title: 'Test 3',
+          route: '/backend-test-3',
+          active: false,
+        },
+        {
+          title: 'Test 4',
+          route: '/backend-test-4',
+          active: false,
+        },
+        {
+          title: 'Test 5',
+          route: '/backend-test-5',
+          active: false,
+        },
+        {
+          title: 'Test 6',
+          route: '/backend-test-6',
+          active: false,
+        },
+        {
+          title: 'Test 7',
+          route: '/backend-test-7',
+          active: false,
+        },
+        {
+          title: 'Test 8',
+          route: '/backend-test-8',
           active: false,
         }
       ]
