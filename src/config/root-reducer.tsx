@@ -12,6 +12,7 @@ import editTask from "../redux/editTaskSlice"
 import beTest1 from "../redux/beTest1"
 import beTest2 from "../redux/beTest2"
 import beTest3 from "../redux/beTest3"
+import beTest4 from "../redux/beTest4"
 
 const rootReducer = combineReducers({
     auth,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     beTest1,
     beTest2,
     beTest3,
+    beTest4,
 })
 
 export default rootReducer

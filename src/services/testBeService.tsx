@@ -50,3 +50,17 @@ export const test3 = (params: test2Type) => {
     params: params
   })
 }
+
+interface test4Type {
+  limit: string | number
+}
+
+export const test4 = (params: test4Type) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/be-test-2/test-4`, {
+    headers: {
+      Authorization: token
+    },
+    params: params
+  })
+}
