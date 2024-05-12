@@ -102,3 +102,17 @@ export const test7 = () => {
     }
   })
 }
+
+interface test8Type {
+  department?: string
+}
+
+export const test8 = (params: test8Type) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/be-test-2/test-8`, {
+    headers: {
+      Authorization: token
+    },
+    params: params
+  })
+}
