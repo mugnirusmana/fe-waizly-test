@@ -75,8 +75,7 @@ const Table = ({
   }, [windowSize])
 
   const setWithTitle = () => {
-    let width = refWidthParent?.current?.offsetWidth
-    width = width - 50
+    let width = refWidthParent?.current?.offsetWidth??0
     if (withNo) width = width - 30
     if (withAction) width = width - 100
     let titleLength: number = titles?.length ?? 0
