@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { TASK } from "../services"
 import { setErrorAxios } from "../config/helper"
 
@@ -58,13 +58,13 @@ const {
 } = deleteTaskSlice.actions
 
 export const setDefaultDeleteTask = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     return dispatch(reducerDeleteTaskDefault())
   }
 }
 
 export const setDelete = (params: any) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerDeleteTask())
     TASK.remove(params)
       .then((response) => {

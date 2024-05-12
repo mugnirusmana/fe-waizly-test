@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { TASK } from "../services"
 import { setErrorAxios } from "../config/helper"
 
@@ -58,13 +58,13 @@ const {
 } = slice.actions
 
 export const setDefaultEditTask = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     return dispatch(reducerEditTaskDefault())
   }
 }
 
 export const setEdit = (params: any, id: any) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerEditTask())
     TASK.edit(params, id)
       .then((response) => {

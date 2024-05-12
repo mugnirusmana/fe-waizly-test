@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { TASK } from "../services"
 import { setSuccessAxios, setErrorAxios } from "../config/helper"
 
@@ -66,13 +66,13 @@ const {
 } = listTaskSlice.actions
 
 export const setDefaultTodo = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     return dispatch(reducerListTodoDefault())
   }
 }
 
 export const getTodo = (params: ParamsListTodoProps) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerListTodo())
     TASK.getList(params)
       .then((response) => {

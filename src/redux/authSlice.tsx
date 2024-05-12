@@ -1,9 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { AUTH } from "./../services"
 import { setSuccessAxios, setErrorAxios } from "./../config/helper"
 
 interface Props {
-    data: any
+    data: {
+      [key: string]: any
+    }
     isLoading: boolean
     isError: boolean
     isSuccess: boolean
@@ -70,7 +72,7 @@ export const authSlice = createSlice({
 export const { reducerRemoveToken, reducerLoginDefault, reducerLogin, reducerLoginSuccess, reducerLoginFailed } = authSlice.actions
 
 export const signIn = (params: ParamsSignInProps) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerLogin())
     AUTH.login(params)
       .then((response) => {
@@ -86,13 +88,13 @@ export const signIn = (params: ParamsSignInProps) => {
 }
 
 export const defaultSignIn = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerLoginDefault())
   }
 }
 
 export const logOut = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerLogin())
     setTimeout(() => {
       dispatch(reducerRemoveToken())

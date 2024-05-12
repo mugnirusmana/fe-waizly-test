@@ -10,7 +10,6 @@ interface InputProps {
 }
 
 const BasicTest1 = () => {
-  const [first, setFirst] = useState(true)
   const [input, setInput] = useState<InputProps>({
     value: '',
     isError: false,
@@ -87,7 +86,6 @@ const BasicTest1 = () => {
             errorMessage={input?.errorMessage}
             placeholder="Input data"
             onChange={(e: InputProps) => {
-              if (first) setFirst(false)
               setInput(e)
             }}
             validate={{
@@ -135,9 +133,8 @@ const BasicTest1 = () => {
                   isError: false,
                   errorMessage: ""
                 })
-                setFirst(true)
               }}
-              disabled={first || input?.isError}
+              disabled={input?.isError}
             />
           </div>
 

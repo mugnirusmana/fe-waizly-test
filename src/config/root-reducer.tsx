@@ -1,28 +1,26 @@
 import { combineReducers } from "@reduxjs/toolkit"
-import AuthSlice from "./../redux/authSlice"
-import SignUpSlice from "../redux/signUpSlice"
-import ListTodoSlice from "../redux/listTodoSlice"
-import ListCompleteSlice from "../redux/listCompleteSlice"
-import CreateTaskSlice from "../redux/createTaskSlice"
-import SortTaskSlice from "../redux/sortTaskSlice"
-import DeleteTaskSlice from "../redux/deleteTaskSlice"
-import CompleteTaskSlice from "../redux/completeTaslSlice"
-import TodoTaskSlice from "../redux/todoTaskSlice"
-import EditTaskSlice from "../redux/editTaskSlice"
+import auth from "./../redux/authSlice"
+import signUp from "../redux/signUpSlice"
+import listTodo from "../redux/listTodoSlice"
+import listComplete from "../redux/listCompleteSlice"
+import createTask from "../redux/createTaskSlice"
+import sortTask from "../redux/sortTaskSlice"
+import deleteTask from "../redux/deleteTaskSlice"
+import completeTask from "../redux/completeTaslSlice"
+import todoTask from "../redux/todoTaskSlice"
+import editTask from "../redux/editTaskSlice"
 
 const rootReducer = combineReducers({
-    auth: AuthSlice,
-    signUp: SignUpSlice,
-    listTodo: ListTodoSlice,
-    listComplete: ListCompleteSlice,
-    createTask: CreateTaskSlice,
-    sortTask: SortTaskSlice,
-    deleteTask: DeleteTaskSlice,
-    completeTask: CompleteTaskSlice,
-    todoTask: TodoTaskSlice,
-    editTask: EditTaskSlice,
+    auth,
+    signUp,
+    listTodo,
+    listComplete,
+    createTask,
+    sortTask,
+    deleteTask,
+    completeTask,
+    todoTask,
+    editTask,
 })
-
-export type RootState = ReturnType<typeof rootReducer>
 
 export default rootReducer

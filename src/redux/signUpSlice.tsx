@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { AUTH } from "../services"
 import { setSuccessAxios, setErrorAxios } from "../config/helper"
 
@@ -68,13 +68,13 @@ const {
 } = authSlice.actions
 
 export const setDefaultSignUp = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     return dispatch(reducerSignUpDefault())
   }
 }
 
 export const setSignUp = (params: ParamsSignUpProps) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerSignUp())
     AUTH.register(params)
       .then((response) => {

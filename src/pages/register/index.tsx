@@ -10,12 +10,12 @@ import Button from "./../../components/auth/button"
 import Alert from "./../../components/auth/alert"
 
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../config/root-reducer"
+import { RootState, RootDispatch } from "../../config/store"
 import { setDefaultSignUp, setSignUp } from "../../redux/signUpSlice"
 
 const Register = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch<any>()
+  const dispatch = useDispatch<RootDispatch>()
   const { signUp } = useSelector((state: RootState) => state)
 
   const [showForm, setShowForm] = useState('opacity-0')

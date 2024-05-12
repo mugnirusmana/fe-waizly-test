@@ -5,11 +5,18 @@ import { FaQuestionCircle } from "@react-icons/all-files/fa/FaQuestionCircle"
 
 import Button from "../button"
 
+export const typeProp = {
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error',
+  QUESTION: 'question',
+}
+
 interface Props {
   show?: boolean
   title?: string
   message?: string
-  type?: string | 'success' | 'warning' | 'error' | 'question'
+  type?: 'success' | 'warning' | 'error' | 'question' | string | null | undefined
   withConfirm?: boolean
   cancelLabel?: string
   confirmLabel?: string
@@ -20,10 +27,10 @@ interface Props {
 const Alert = ({show, title, message, type, withConfirm, cancelLabel, onCancel, confirmLabel, onConfirm}: Props) => {
 
   const renderType = () => {
-    if (type === 'success') return <FaCheckCircle className="text-2xl text-lime-600" />
-    if (type === 'warning') return <FaExclamationCircle className="text-2xl text-amber-600" />
-    if (type === 'error') return <IoCloseCircle className="text-2xl text-rose-600" />
-    if (type === 'question') return <FaQuestionCircle className="text-2xl text-cyan-600" />
+    if (type && type === typeProp.SUCCESS) return <FaCheckCircle className="text-2xl text-lime-600" />
+    if (type && type === typeProp.WARNING) return <FaExclamationCircle className="text-2xl text-amber-600" />
+    if (type && type === typeProp.ERROR) return <IoCloseCircle className="text-2xl text-rose-600" />
+    if (type && type === typeProp.QUESTION) return <FaQuestionCircle className="text-2xl text-cyan-600" />
     return null
   }
 

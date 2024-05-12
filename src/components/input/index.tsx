@@ -2,6 +2,13 @@ import { IoClose } from "@react-icons/all-files/io5/IoClose"
 import { FaExclamationCircle } from "@react-icons/all-files/fa/FaExclamationCircle"
 import { useState } from "react"
 
+interface valueType {
+  name?: string | null | undefined
+  isError: boolean
+  errorMessage: string
+  value: string
+}
+
 interface Type {
   widthFit?: boolean
   label?: string
@@ -25,9 +32,9 @@ interface Type {
   errorMessage?: string
   placeholder?: string
   value: string
-  onChange?: Function
+  onChange?: (value: valueType) => void
   icon?: any
-  onClickIcon?: Function
+  onClickIcon?: () => void
   onClearText?: Function
   customInfo?: string
 }
@@ -52,46 +59,44 @@ const Input = ({
 
   const setValidate = (val: string) => {
     if (onChange) {
-      let fieldName = name??'this field'
-      let res = {
+      let fieldName: string = name? `The ${name}` : 'This field'
+      let msg: string | null = null
+      let res: valueType = {
         name: name??null,
         isError: false,
         errorMessage: '',
         value: val
       }
 
-      if (validate) {
-        let msg = null
-        if(validate?.fields?.regex) {
-          if (val && !validate?.fields?.regex.test(val)) {
-            msg = validate?.customMessage?.regex??`${fieldName} format is invalid`
-            res.isError = true
-            res.errorMessage = msg
-          }
+      if(validate?.fields?.regex) {
+        if (val && !validate?.fields?.regex.test(val)) {
+          msg = validate?.customMessage?.regex??`${fieldName} format is invalid`
+          res.isError = true
+          res.errorMessage = msg
         }
+      }
 
-        if(validate?.fields?.max) {
-          if (val && val?.length > validate?.fields?.max) {
-            msg = validate?.customMessage?.max??`${fieldName} maximum length ${validate?.fields?.max} character${val?.length > 1 ? 's' : ''}`
-            res.isError = true
-            res.errorMessage = msg
-          }
+      if(validate?.fields?.max) {
+        if (val && val?.length > validate?.fields?.max) {
+          msg = validate?.customMessage?.max??`${fieldName} maximum length ${validate?.fields?.max} character${val?.length > 1 ? 's' : ''}`
+          res.isError = true
+          res.errorMessage = msg
         }
+      }
 
-        if(validate?.fields?.min) {
-          if (val && val?.length < validate?.fields?.min) {
-            msg = validate?.customMessage?.min??`${fieldName} minimum length ${validate?.fields?.min} character${val?.length > 1 ? 's' : ''}`
-            res.isError = true
-            res.errorMessage = msg
-          }
+      if(validate?.fields?.min) {
+        if (val && val?.length < validate?.fields?.min) {
+          msg = validate?.customMessage?.min??`${fieldName} minimum length ${validate?.fields?.min} character${val?.length > 1 ? 's' : ''}`
+          res.isError = true
+          res.errorMessage = msg
         }
+      }
 
-        if(validate?.fields?.required) {
-          if (!val || val === "" || val === '') {
-            msg = validate?.customMessage?.required??`${fieldName} is required`
-            res.isError = true
-            res.errorMessage = msg
-          }
+      if(validate?.fields?.required) {
+        if (!val || val === "" || val === '') {
+          msg = validate?.customMessage?.required??`${fieldName} is required`
+          res.isError = true
+          res.errorMessage = msg
         }
       }
       return onChange(res)

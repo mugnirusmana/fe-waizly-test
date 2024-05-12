@@ -20,8 +20,8 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export default configureStore({
-  devTools: ENV.MODE !== "PROUCTION",
+const store = configureStore({
+  devTools: ENV.MODE ? ENV.MODE.toLowerCase() !== "production" : true,
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -30,3 +30,9 @@ export default configureStore({
       },
     }),
 })
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type RootDispatch = typeof store.dispatch
+
+export default store

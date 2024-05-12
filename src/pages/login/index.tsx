@@ -13,11 +13,11 @@ import Checkbox from "./../../components/checkbox"
 
 import { signIn, defaultSignIn } from "./../../redux/authSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../config/root-reducer"
+import { RootState, RootDispatch } from "../../config/store"
 
 const Login = () => {
 	const navigate = useNavigate()
-	const dispatch = useDispatch<any>()
+	const dispatch = useDispatch<RootDispatch>()
 	const auth = useSelector((state: RootState) => state?.auth)
 
 	const [showForm, setShowForm] = useState('opacity-0')
@@ -89,7 +89,7 @@ const Login = () => {
 				<span className="w-full flex items-center justify-center font-bold text-2xl pb-5">LOGIN</span>
 
 				<Input
-					type="text"
+					type="email"
 					name={"username"}
 					validate={{
 						fields: {
@@ -138,6 +138,7 @@ const Login = () => {
 							title={'Remember me'}
 							textClass="text-white text-xs"
 							onCheck={(res: boolean) => setRememberMe(res)}
+							type="square"
 						/>
 					</div>
 					{/* <div className="flex flex-row gap-1">

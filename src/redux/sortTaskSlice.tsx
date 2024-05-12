@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { Dispatch, createSlice } from "@reduxjs/toolkit"
 import { TASK } from "../services"
 import { setErrorAxios } from "../config/helper"
 
@@ -58,13 +58,13 @@ const {
 } = listTaskSlice.actions
 
 export const setDefaultSortTask = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     return dispatch(reducerSortTaskDefault())
   }
 }
 
 export const setSort = (params: any) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: Dispatch) => {
     dispatch(reducerSortTask())
     TASK.sort(params)
       .then((response) => {

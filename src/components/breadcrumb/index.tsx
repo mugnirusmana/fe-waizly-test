@@ -32,7 +32,7 @@ const Breadcrumb = ({title, subtitle, data}: Props) => {
         <span className="font-bold">{title??'Title'}</span>
         <span className="text-sm">{subtitle??''}</span>
       </div>
-      <div className="w-fit flex flex-row text-xs gap-1">
+      <div className="w-fit flex flex-col laptop:flex-row text-xs gap-1">
         {renderListbreadcrum()}
       </div>
     </div>

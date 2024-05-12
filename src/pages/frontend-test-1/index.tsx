@@ -8,8 +8,9 @@ import { FaCaretLeft } from "@react-icons/all-files/fa/FaCaretLeft"
 import { FaCaretRight } from "@react-icons/all-files/fa/FaCaretRight"
 
 import Breadcrumb from "../../components/breadcrumb"
+
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../config/root-reducer"
+import { RootState, RootDispatch } from "../../config/store"
 import { getTodo, setDefaultTodo } from "../../redux/listTodoSlice"
 import { getComplete, setDefaultComplete } from "../../redux/listCompleteSlice"
 import { setDefaultSortTask } from "../../redux/sortTaskSlice"
@@ -25,7 +26,7 @@ import Button from "../../components/button"
 import Alert from "../../components/alert"
 
 const FrontendTest1 = () => {
-  const dispatch = useDispatch<any>()
+  const dispatch = useDispatch<RootDispatch>()
   const {
     auth,
     listTodo,
@@ -393,7 +394,7 @@ const FrontendTest1 = () => {
         show: true,
         title: 'Complete',
         message: errorMessage??'Someting went wrong',
-        type: 'error'
+        type: "error"
       })
     }
   }, [completeTask])
@@ -595,7 +596,7 @@ const FrontendTest1 = () => {
         show={confirmAlert?.show}
         title={confirmAlert?.title}
         message={confirmAlert?.message}
-        type="question"
+        type={'question'}
         cancelLabel="No"
         confirmLabel="Yes"
         withConfirm

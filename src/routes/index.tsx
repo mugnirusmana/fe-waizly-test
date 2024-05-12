@@ -12,12 +12,12 @@ import {
 	PublicRoute
 } from "./routes"
 
+import { RootState } from "../config/store"
+
 import NotFound from "./../pages/not-found"
 import AuthedTemplate from "./components/AuthedComponent"
 import UnauthedTemplate from "./components/UnauthedComponent"
 import PublicTemplate from "./components/PublicComponent"
-
-import { RootState } from "./../config/root-reducer"
 
 const Routes = () => {
 	const auth = useSelector((state: RootState) => state?.auth)

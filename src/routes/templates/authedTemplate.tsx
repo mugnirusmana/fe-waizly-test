@@ -8,8 +8,8 @@ import { FaAngleRight } from "@react-icons/all-files/fa/FaAngleRight"
 import { FaFile } from "@react-icons/all-files/fa/FaFile"
 
 import { useDispatch, useSelector } from "react-redux"
+import { RootState, RootDispatch } from "../../config/store"
 import { logOut } from "./../../redux/authSlice"
-import { RootState } from "../../config/root-reducer"
 
 import { useOutsideClick } from "./../../config/hooks"
 
@@ -20,7 +20,7 @@ interface Props {
 const Dashboard = ({ children }: Props) => {
   const navigate = useNavigate()
   const { auth } = useSelector((state: RootState) => state)
-  const dispatch = useDispatch<any>()
+  const dispatch = useDispatch<RootDispatch>()
 
   const [showMenu, setShowMenu] = useState(false)
   const [showSetting, setShowSetting] = useState(false)

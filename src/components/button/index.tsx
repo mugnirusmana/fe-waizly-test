@@ -1,5 +1,5 @@
 interface Props {
-  type?: string | 'submit' | 'reset'
+  type?: 'submit' | 'reset' | string | null | undefined
   full?: boolean
   label?: string
   onClick?: Function

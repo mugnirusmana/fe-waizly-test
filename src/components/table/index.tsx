@@ -8,9 +8,9 @@ import Select from "./select"
 import Button from "./button"
 
 interface ItemTitles {
-  name?: string,
-  key?: string,
-  position?: string | 'left' | 'center' | 'right',
+  name?: string
+  key?: string
+  position?: 'left' | 'center' | 'right' | string | null | undefined
   constumRender?: (item?: any | null | undefined) => void
 }
 
