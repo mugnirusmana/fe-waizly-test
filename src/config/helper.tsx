@@ -24,6 +24,7 @@ interface formatCurrencyOptionType {
 export const formatCurrency = (value: number, options?: formatCurrencyOptionType) => {
   return new Intl.NumberFormat(options?.locale??"id-ID", {
     style: "currency",
-    currency: options?.currency??"IDR"
+    currency: options?.currency??"IDR",
+    maximumFractionDigits: 0
   }).format(value)
 }

@@ -105,7 +105,7 @@ const BackendTest1 = () => {
                 name: 'Salary',
                 key: 'salary',
                 position: 'left',
-                constumRender: (item) => formatCurrency(parseInt(item?.salary??0))
+                constumRender: (item) => formatCurrency(parseInt(item?.salary??0), {locale: 'en-EN', currency: 'USD'})
               },
               {
                 name: 'Department',
