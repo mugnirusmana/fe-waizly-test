@@ -15,6 +15,7 @@ import beTest3 from "../redux/beTest3"
 import beTest4 from "../redux/beTest4"
 import beTest5 from "../redux/beTest5"
 import beTest6 from "../redux/beTest6"
+import beTest7 from "../redux/beTest7"
 
 const rootReducer = combineReducers({
     auth,
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
     beTest4,
     beTest5,
     beTest6,
+    beTest7,
 })
 
 export default rootReducer

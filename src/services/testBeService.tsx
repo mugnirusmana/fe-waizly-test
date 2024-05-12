@@ -93,3 +93,12 @@ export const test6 = (params: test6Type) => {
     params: params
   })
 }
+
+export const test7 = () => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/be-test-2/test-7`, {
+    headers: {
+      Authorization: token
+    }
+  })
+}
