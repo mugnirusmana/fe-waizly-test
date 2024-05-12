@@ -8,6 +8,7 @@ import BackendTest2 from "./../pages/backend-test-2"
 import BackendTest3 from "./../pages/backend-test-3"
 import BackendTest4 from "./../pages/backend-test-4"
 import BackendTest5 from "./../pages/backend-test-5"
+import BackendTest6 from "./../pages/backend-test-6"
 import FrontEndTest1 from "./../pages/frontend-test-1"
 
 import Login from "./../pages/login"
@@ -62,6 +63,10 @@ const AuthedRoute: TypesArray = [
 	{
 		path: "/backend-test-5",
 		component: BackendTest5,
+	},
+	{
+		path: "/backend-test-6",
+		component: BackendTest6,
 	},
 	{
 		path: '/frontend-test-1',

@@ -18,7 +18,6 @@ export const test1 = (params: test1Type) => {
   })
 }
 
-
 interface test2Type {
   page?: string | number
   limit?: string | number
@@ -72,6 +71,22 @@ interface test5Type {
 export const test5 = (params: test5Type) => {
   const token = localStorage.getItem('token')
   return axios.get(`${ENV.API}/be-test-2/test-5`, {
+    headers: {
+      Authorization: token
+    },
+    params: params
+  })
+}
+
+interface test6Type {
+  page?: string | number
+  limit?: string | number
+  keyword?: string | null | undefined
+}
+
+export const test6 = (params: test6Type) => {
+  const token = localStorage.getItem('token')
+  return axios.get(`${ENV.API}/be-test-2/test-6`, {
     headers: {
       Authorization: token
     },
