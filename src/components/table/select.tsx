@@ -99,7 +99,6 @@ const Select = React.forwardRef(({
       if (itemKey) {
         value = selectItem[itemKey]
       }
-
       return <span className="w-fit whitespace-nowrap text-[10px]">{value}</span>
     }
     return <span className="w-fit whitespace-nowrap text-[10px] text-ellipsis overflow-hidden text-gray-400">{placeholder??'select'}</span>

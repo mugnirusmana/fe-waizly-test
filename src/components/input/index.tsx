@@ -200,7 +200,7 @@ const Input = ({
         <input
           type={type??"text"}
           placeholder={placeholder??'Placeholder'}
-          className={`w-full px-2 py-2 text-xs outline-none bg-transparent duration-300 ${isError ? 'text-rose-500 placeholder:text-rose-500' : 'text-gray-700 placeholder:text-gray-700'}`}
+          className={`w-full px-2 py-2 text-xs outline-none bg-transparent duration-300 ${isError ? 'text-rose-500 placeholder:text-rose-500' : 'text-gray-700 placeholder:text-gray-400'}`}
           onChange={(e: any) => setValidate(e?.target?.value)}
           value={value??""}
           autoComplete="new-password"

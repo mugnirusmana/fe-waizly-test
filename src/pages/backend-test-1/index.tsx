@@ -1,8 +1,68 @@
+import { useEffect, useState } from "react"
+import { AiFillFilter } from "@react-icons/all-files/ai/AiFillFilter"
+
 import Breadcrumb from "./../../components/breadcrumb"
 import Table from "./../../components/table"
 import Loader from "./../../components/loader"
 
+import { useDispatch, useSelector } from "react-redux"
+import { RootDispatch, RootState } from "../../config/store"
+import { getBeTest1, setDefaultBeTest1 } from './../../redux/beTest1'
+import Input from "../../components/input"
+
 const BackendTest1 = () => {
+  const [page, setPage] = useState<number>(1)
+  const [limit, setLimit] = useState<number>(5)
+  const [pages, setPages] = useState([])
+  const [keyword, setKeyword] = useState({
+    value: '',
+    isError: false,
+    errorMessage: ''
+  })
+
+  const { beTest1 } = useSelector((state: RootState) => state)
+  const dispatch = useDispatch<RootDispatch>()
+
+  useEffect(() => {
+    getData()
+  }, [page, limit])
+
+  useEffect(() => {
+    let {
+      data,
+      isSuccess,
+      isLoading
+    } = beTest1
+
+    if (!isLoading && isSuccess) {
+      setPage(data?.paginate?.current_page??page)
+      setLimit(data?.paginate?.per_page??limit)
+      let newPages: any = []
+      data?.paginate?.pages?.forEach((item: any) => {
+        newPages = newPages.concat(item?.value)
+      })
+      setPages(newPages)
+      dispatch(setDefaultBeTest1())
+    }
+  }, [beTest1])
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      getData()
+    }, 500)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [keyword])
+
+  const getData = () => {
+    let params = {
+      page: page,
+      limit: limit,
+      keyword: keyword?.value
+    }
+    dispatch(getBeTest1(params))
+  }
+
   return (
     <div className="w-full h-full flex flex-col gap-5 pt-[60px]">
       <Breadcrumb
@@ -13,134 +73,65 @@ const BackendTest1 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
-        <div className="w-full h-fit rounded bg-white flex p-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5">
+          <div className="w-full flex flex-col mb-2">
+            <span className="w-fit flex font-bold">Filter</span>
+            <div className="w-full laptop:w-1/3">
+              <Input
+                value={keyword?.value}
+                onChange={(e) => setKeyword(e)}
+                onClearText={(e: any) => setKeyword(e)}
+                placeholder="Search by name, job title or department"
+              />
+            </div>
+          </div>
           <Table
             titles={[
               {
-                name: 'Title 1',
-                key: 'id',
-                position: 'left'},
-              {
-                name: 'Title 2',
+                name: 'Name',
                 key: 'name',
-                position: 'left'},
-              {
-                name: 'Title 3',
-                key: 'title',
-                position: 'left',
-                constumRender: (item) => {
-                  if(item?.title === 'title 1') return <div className="border border-blue-700 bg-blue-700 w-fit rounded text-xs px-2 text-white">{item.title}</div>
-                  if(item?.title === 'title 5') return <div className="border border-green-700 bg-green-700 w-fit rounded text-xs px-2 text-white">{item.title}</div>
-                  return <div className="border border-red-700 bg-red-700 w-fit rounded text-xs px-2 text-white">{item.title}</div>
-                }
+                position: 'left'
               },
               {
-                name: 'Title 4',
-                key: 'desc',
-                position: 'left'},
-              {
-                name: 'Title 5',
-                key: 'created_at',
-                position: 'left',
-                constumRender: () => { return 'just created_at'}},
-            ]}
-            data={[
-              {
-                id: 1,
-                name: 'name 1',
-                title: 'title 1',
-                desc: 'desc 1',
-                created_at: '2024-05-10T14:20:50'
+                name: 'Job Title',
+                key: 'job_title',
+                position: 'left'
               },
               {
-                id: 2,
-                name: 'name 2',
-                title: 'title 2',
-                desc: 'desc 2',
-                created_at: '2024-05-11T14:20:50'
+                name: 'Salary',
+                key: 'salary',
+                position: 'left'
               },
               {
-                id: 3,
-                name: 'name 3',
-                title: 'title 3',
-                desc: 'desc 3',
-                created_at: '2024-05-11T14:20:50'
+                name: 'Department',
+                key: 'department',
+                position: 'left'
               },
               {
-                id: 4,
-                name: 'name 4',
-                title: 'title 4',
-                desc: 'desc 4',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 5,
-                name: 'name 5',
-                title: 'title 5',
-                desc: 'desc 5',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 6,
-                name: 'name 6',
-                title: 'title 6',
-                desc: 'desc 6',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 7,
-                name: 'name 7',
-                title: 'title 7',
-                desc: 'desc 7',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 8,
-                name: 'name 8',
-                title: 'title 8',
-                desc: 'desc 8',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 9,
-                name: 'name 9',
-                title: 'title 9',
-                desc: 'desc 9',
-                created_at: '2024-05-11T14:20:50'
-              },
-              {
-                id: 10,
-                name: 'name 10',
-                title: 'title 10',
-                desc: 'desc 10',
-                created_at: '2024-05-11T14:20:50'
+                name: 'Join Date',
+                key: 'join_date',
+                position: 'left'
               }
             ]}
+            data={beTest1?.data?.list??[]}
             withNo={true}
-            withAction={true}
-            withFooter={true}
-            perPage={10}
-            currentPage={1}
-            totalPage={10}
-            totalData={100}
-            pages={[1,2,3,4,5,6,7,8,9,10,11]}
-            renderAction={(item) => (
-              <div className="w-full flex flex-row justify-end gap-2">
-                <span className="w-fit h-fit rounded border border-gray-400 items-center justify-center text-center px-2 text-xs cursor-pointer">A</span>
-                <span className="w-fit h-fit rounded border border-gray-400 items-center justify-center text-center px-2 text-xs cursor-pointer">A</span>
-                <span className="w-fit h-fit rounded border border-gray-400 items-center justify-center text-center px-2 text-xs cursor-pointer">A</span>
-              </div>
-            )}
-            onChangePerPage={(page) => console.log('onChangePerPage => ', page)}
-            onNextPage={(page) => console.log('onNextPage => ', page)}
-            onPrevPage={(page) => console.log('onPrevPage => ', page)}
-            onGoToPage={(page) => console.log('onGoToPage => ', page)}
+            withAction={false}
+            withFooter={false}
+            perPage={limit}
+            currentPage={page}
+            totalPage={beTest1?.data?.paginate?.total_page??0}
+            totalData={beTest1?.data?.paginate?.total_data??0}
+            pages={pages??[]}
+            onChangePerPage={(limit) => setLimit(limit)}
+            onNextPage={(page) => setPage(page)}
+            onPrevPage={(page) => setPage(page)}
+            onGoToPage={(page) => setPage(page)}
           />
         </div>
         <div className="w-full h-[40px]"></div>
       </div>
 
-      <Loader />
+      <Loader show={beTest1?.isLoading} />
     </div>
   )
 }

@@ -20,16 +20,19 @@ interface Props {
   withAction?:boolean
   withFooter?: boolean
   data?: Array<any>
-  perPage?: string | number | null | undefined
-  pages?: Array<any>
+  perPage?: number | null | undefined
+  pages?: Array<{
+    active?: boolean,
+    value?: string | number
+  }>
   currentPage: number
   totalPage: number
   totalData?: string | number | null | undefined
   renderAction?: (item?: any | null | undefined) => void | any
-  onChangePerPage?: (page?: string | number | null | undefined) => void
-  onNextPage?: (page?: string | number | null | undefined) => void
-  onPrevPage?: (page?: string | number | null | undefined) => void
-  onGoToPage?: (page?: string | number | null | undefined) => void
+  onChangePerPage?: (page: number) => void
+  onNextPage?: (page: number) => void
+  onPrevPage?: (page: number) => void
+  onGoToPage?: (page: number) => void
 }
 
 const Table = ({
@@ -115,6 +118,8 @@ const Table = ({
 
   const renderDataContent = () => {
     if (data && data?.length > 0 && titles && titles?.length > 0) {
+      console.log('======================= ')
+      console.log('data ', data)
       return data?.map((item: any, index: number) => {
         return (
           <div key={index} className={`w-full laptop:w-fit flex flex-col rounded laptop:rounded-none laptop:flex-row gap-2 ${index === 0 ? 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t-0' : 'border laptop:border-l-0 laptop:border-r-0 laptop:border-b-0 border-gray-400 laptop:border-t laptop:border-t-gray-100'} laptop:hover:bg-gray-100`}>
@@ -125,11 +130,11 @@ const Table = ({
         )
       })
     }
-    return <div className="w-full flex flex-row items-center justify-center text-center italic text-xs border-b border-b-gray-400 px-5 pb-5 pt-4">No data available</div>
+    return <div className="w-full flex flex-row items-center justify-center text-center italic text-xs py-5">No data available</div>
   }
 
   const renderNumber = (no: number) => {
-    let number: any = ((currentPage * totalPage) - totalPage) + no
+    let number: any = ((currentPage * (perPage??0)) - (perPage??0)) + no
     return <div className="w-full laptop:min-w-[30px] laptop:w-[30px] laptop:max-w-[30px] laptop:py-2 laptop:px-1 flex flex-row laptop:justify-center text-center">
       <div className="w-full bg-gray-400 laptop:hidden flex justify-center p-1 rounded-tl-sm rounded-tr-sm font-bold text-white">No. {number}</div>
       <span className="w-fit hidden laptop:flex items-center font-bold">{number}</span>
