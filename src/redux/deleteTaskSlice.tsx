@@ -68,7 +68,7 @@ export const setDelete = (params: any) => {
     dispatch(reducerDeleteTask())
     TASK.remove(params)
       .then((response) => {
-        if (response?.data?.meta?.is_success) {
+        if (response?.meta?.is_success) {
           dispatch(reducerDeleteTaskSuccess())
         } else {
           dispatch(reducerDeleteTaskFailed(setErrorAxios(response)))

@@ -78,7 +78,7 @@ export const setSignUp = (params: ParamsSignUpProps) => {
     dispatch(reducerSignUp())
     AUTH.register(params)
       .then((response) => {
-        if (response?.data?.meta?.is_success) {
+        if (response?.meta?.is_success) {
           dispatch(reducerSignUpSuccess(setSuccessAxios(response)))
         } else {
           dispatch(reducerSignUpFailed(setErrorAxios(response)))

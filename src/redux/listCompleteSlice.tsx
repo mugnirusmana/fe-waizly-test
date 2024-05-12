@@ -76,7 +76,7 @@ export const getComplete = (params: ParamsListCompleteProps) => {
     dispatch(reducerListComplete())
     TASK.getList(params)
       .then((response) => {
-        if (response?.data?.meta?.is_success) {
+        if (response?.meta?.is_success) {
           dispatch(reducerListCompleteSuccess(setSuccessAxios(response)))
         } else {
           dispatch(reducerListCompleteFailed(setErrorAxios(response)))

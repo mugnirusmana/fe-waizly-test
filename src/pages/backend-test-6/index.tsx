@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import _ from "lodash"
 
 import Breadcrumb from "./../../components/breadcrumb"
 import Table from "./../../components/table"

@@ -1,5 +1,3 @@
-import axios from "axios"
-
 import ENV from "./../config/base-env"
 
 interface test1Type {
@@ -8,14 +6,14 @@ interface test1Type {
   keyword?: string | null | undefined
 }
 
-export const test1 = (params: test1Type) => {
-  const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-1`, {
+export const test1 = (params: any | test1Type) => {
+  const token: any = localStorage.getItem('token')
+  return fetch(`${ENV.API}/be-test-2/test-1?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 interface test2Type {
@@ -24,14 +22,14 @@ interface test2Type {
   job_title?: string | null | undefined
 }
 
-export const test2 = (params: test2Type) => {
+export const test2 = (params: any | test2Type) => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-2`, {
+  return fetch(`${ENV.API}/be-test-2/test-2?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 interface test2Type {
@@ -40,42 +38,46 @@ interface test2Type {
   departments?: Array<string>
 }
 
-export const test3 = (params: test2Type) => {
-  const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-3`, {
-    headers: {
-      Authorization: token
-    },
-    params: params
+export const test3 = (params: any | test2Type) => {
+  let newParams = `page=${params?.page}&limit=${params?.limit}`
+  params?.departments?.forEach((item: any, key: number) => {
+    newParams = `${newParams}&departments[]=${item}`
   })
+  const token = localStorage.getItem('token')
+  return fetch(`${ENV.API}/be-test-2/test-3?${newParams}`, {
+    method: 'GET',
+    headers: {
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 interface test4Type {
   limit: string | number
 }
 
-export const test4 = (params: test4Type) => {
+export const test4 = (params: any | test4Type) => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-4`, {
+  return fetch(`${ENV.API}/be-test-2/test-4?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 interface test5Type {
   limit: string | number
 }
 
-export const test5 = (params: test5Type) => {
+export const test5 = (params: any | test5Type) => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-5`, {
+  return fetch(`${ENV.API}/be-test-2/test-5?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 interface test6Type {
@@ -84,35 +86,36 @@ interface test6Type {
   keyword?: string | null | undefined
 }
 
-export const test6 = (params: test6Type) => {
+export const test6 = (params: any | test6Type) => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-6`, {
+  return fetch(`${ENV.API}/be-test-2/test-6?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }
 
 export const test7 = () => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-7`, {
+  return fetch(`${ENV.API}/be-test-2/test-7`, {
+    method: 'GET',
     headers: {
-      Authorization: token
+      Authorization: token??''
     }
-  })
+  }).then((res) => res.json())
 }
 
 interface test8Type {
   department?: string
 }
 
-export const test8 = (params: test8Type) => {
+export const test8 = (params: any | test8Type) => {
   const token = localStorage.getItem('token')
-  return axios.get(`${ENV.API}/be-test-2/test-8`, {
+  return fetch(`${ENV.API}/be-test-2/test-8?${new URLSearchParams(params)}`, {
+    method: 'GET',
     headers: {
-      Authorization: token
-    },
-    params: params
-  })
+      Authorization: token??''
+    }
+  }).then((res) => res.json())
 }

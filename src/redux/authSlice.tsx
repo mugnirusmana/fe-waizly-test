@@ -76,8 +76,8 @@ export const signIn = (params: ParamsSignInProps) => {
     dispatch(reducerLogin())
     AUTH.login(params)
       .then((response) => {
-        if (response?.data?.meta?.is_success) {
-          localStorage.setItem('token', response?.data?.data?.access_token)
+        if (response?.meta?.is_success) {
+          localStorage.setItem('token', response?.data?.access_token)
           dispatch(reducerLoginSuccess(setSuccessAxios(response)))
         } else {
           dispatch(reducerLoginFailed(setErrorAxios(response)))

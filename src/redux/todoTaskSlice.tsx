@@ -68,7 +68,7 @@ export const setTodo = (params: any) => {
     dispatch(reducerTodoTask())
     TASK.todo(params)
       .then((response) => {
-        if (response?.data?.meta?.is_success) {
+        if (response?.meta?.is_success) {
           dispatch(reducerTodoTaskSuccess())
         } else {
           dispatch(reducerTodoTaskFailed(setErrorAxios(response)))

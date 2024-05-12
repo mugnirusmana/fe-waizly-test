@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import _ from "lodash"
+import { useEffect } from "react"
 
 import Breadcrumb from "./../../components/breadcrumb"
 import Table from "./../../components/table"
@@ -12,8 +11,6 @@ import { getBeTest7, setDefaultBeTest7 } from './../../redux/beTest7'
 import { formatCurrency } from "./../../config/helper"
 
 const BackendTest7 = () => {
-  const [pages, setPages] = useState([])
-
   const { beTest7 } = useSelector((state: RootState) => state)
   const dispatch = useDispatch<RootDispatch>()
 
@@ -23,34 +20,17 @@ const BackendTest7 = () => {
 
   useEffect(() => {
     let {
-      data,
       isSuccess,
       isLoading
     } = beTest7
 
     if (!isLoading && isSuccess) {
-      let newPages: any = []
-      data?.paginate?.pages?.forEach((item: any) => {
-        newPages = newPages.concat(item?.value)
-      })
-      setPages(newPages)
       dispatch(setDefaultBeTest7())
     }
   }, [beTest7])
 
-  const getData = (selectPage?: number) => {
+  const getData = () => {
     dispatch(getBeTest7())
-  }
-
-  const renderAverageSalary = () => {
-    let first_data: any = {}
-    let result: any = 0
-    if (beTest7?.data?.list?.length > 0) {
-      first_data = _.first(beTest7?.data?.list)
-      result = parseInt(first_data?.average_salary)
-    }
-
-    return <div className="">Average Salary: {formatCurrency(result, { locale: 'en-EN', 'currency': 'USD' })}</div>
   }
 
   return (
