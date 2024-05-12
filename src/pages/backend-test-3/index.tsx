@@ -128,6 +128,11 @@ const BackendTest3 = () => {
           </div>
         </div>
 
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show employees by department{departments?.length > 1 ? 's' : ''} <strong>({departments?.join(', ')})</strong></span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <Table
             titles={[

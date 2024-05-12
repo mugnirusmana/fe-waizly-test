@@ -91,6 +91,11 @@ const BackendTest5 = () => {
           </div>
         </div>
 
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show <strong>{limit?.value}</strong> employee{limit?.value > 1 ? 's' :''} with the highest total sales</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 gap-5">
           {beTest5?.data?.without_group?.length > 0 ? (
             <div className="w-full flex flex-col gap-2 border border-gray-300 laptop:border-0 p-5 laptop:p-0 rounded">

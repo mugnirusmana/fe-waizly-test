@@ -50,17 +50,6 @@ const BackendTest6 = () => {
     dispatch(getBeTest6(params))
   }
 
-  const renderAverageSalary = () => {
-    let first_data: any = {}
-    let result: any = 0
-    if (beTest6?.data?.list?.length > 0) {
-      first_data = _.first(beTest6?.data?.list)
-      result = parseInt(first_data?.average_salary)
-    }
-
-    return <div className="">Average Salary: {formatCurrency(result, { locale: 'en-EN', 'currency': 'USD' })}</div>
-  }
-
   return (
     <div className="w-full h-full flex flex-col gap-5 pt-[60px]">
       <Breadcrumb
@@ -71,8 +60,12 @@ const BackendTest6 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show name, salary and average salary of all employees</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 gap-2">
-          {renderAverageSalary()}
           <Table
             titles={[
               {
@@ -85,6 +78,12 @@ const BackendTest6 = () => {
                 key: 'salary',
                 position: 'left',
                 constumRender: (item) => formatCurrency(parseInt(item?.salary??0), {locale: 'en-EN', currency: 'USD'})
+              },
+              {
+                name: 'Average Salary of All Employees',
+                key: 'average_salary',
+                position: 'left',
+                constumRender: (item) => formatCurrency(parseInt(item?.average_salary??0), {locale: 'en-EN', currency: 'USD'})
               }
             ]}
             data={beTest6?.data?.list??[]}

@@ -88,6 +88,12 @@ const BackendTest1 = () => {
             </div>
           </div>
         </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show all employees data</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <Table
             titles={[

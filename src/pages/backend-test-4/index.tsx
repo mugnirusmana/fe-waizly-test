@@ -94,6 +94,11 @@ const BackendTest4 = () => {
           </div>
         </div>
 
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Sum average salary for every who was join who joined in the last <strong>{limit?.value}</strong> year{limit?.value > 1 ? 's' :''}</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           {beTest4?.data?.average > 0 ? (
             <div className="w-full flex flex-col border border-gray-400 rounded p-2 text-sm">

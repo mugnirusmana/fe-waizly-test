@@ -63,6 +63,11 @@ const BackendTest7 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show name and total sales with rank for every employees and sort by total sales, the top is the highest</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 gap-2">
           <Table
             titles={[
