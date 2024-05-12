@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AiFillFilter } from "@react-icons/all-files/ai/AiFillFilter"
+import moment from "moment"
 
 import Breadcrumb from "./../../components/breadcrumb"
 import Table from "./../../components/table"
@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootDispatch, RootState } from "../../config/store"
 import { getBeTest1, setDefaultBeTest1 } from './../../redux/beTest1'
 import Input from "../../components/input"
+
+import { formatCurrency } from "./../../config/helper"
 
 const BackendTest1 = () => {
   const [page, setPage] = useState<number>(1)
@@ -100,7 +102,8 @@ const BackendTest1 = () => {
               {
                 name: 'Salary',
                 key: 'salary',
-                position: 'left'
+                position: 'left',
+                constumRender: (item) => formatCurrency(parseInt(item?.salary??0))
               },
               {
                 name: 'Department',
@@ -110,7 +113,8 @@ const BackendTest1 = () => {
               {
                 name: 'Join Date',
                 key: 'join_date',
-                position: 'left'
+                position: 'left',
+                constumRender: (item) => moment(item?.join_date).format('DD MMMM YYYY'),
               }
             ]}
             data={beTest1?.data?.list??[]}
