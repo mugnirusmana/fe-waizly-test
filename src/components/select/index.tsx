@@ -4,6 +4,7 @@ import { useState } from "react"
 interface Props {
   value?: any
   itemKey?: string
+  itemLabel?: string
   data?: Array<any>
   placeholder?: string
   onChange?: (item: any) => void
@@ -12,6 +13,7 @@ interface Props {
 const Select = ({
   value,
   itemKey,
+  itemLabel,
   data,
   placeholder,
   onChange
@@ -21,7 +23,7 @@ const Select = ({
   const renderValue = () => {
     if (value) {
       let val = value
-      if (itemKey) val = value[itemKey]
+      if (itemLabel) val = value[itemLabel]
       return <span className="font-normal text-xs">{val}</span>
     }
     return <span className="font-normal text-xs text text-gray-400 whitespace-nowrap text-ellipsis">{placeholder??'Placeholder'}</span>
@@ -44,17 +46,19 @@ const Select = ({
     if (data && data?.length > 0) {
       return data?.map((item: any, index: number) => {
         let val = item
+        let key = item
         let selectItem = value
+        if (itemLabel) val = item[itemLabel]
         if (itemKey) {
-          val = item[itemKey]
+          key = item[itemKey]
           selectItem = value[itemKey]
         }
         return <span
           key={index}
-          className={`p-2 rounded hover:bg-gray-700 hover:text-white ${val === selectItem ? 'bg-gray-700 text-white cursor-default' : 'cursor-pointer'}`}
+          className={`p-2 rounded hover:bg-gray-700 hover:text-white ${key === selectItem ? 'bg-gray-700 text-white cursor-default' : 'cursor-pointer'}`}
           onClick={() => {
             if (onChange) {
-              if (val !== selectItem) {
+              if (key !== selectItem) {
                 setShow(false)
                 return onChange(item)
               }

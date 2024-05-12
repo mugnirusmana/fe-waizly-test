@@ -2,20 +2,19 @@ import { useEffect, useState } from "react"
 
 import Breadcrumb from "./../../components/breadcrumb"
 import Loader from "./../../components/loader"
+import Alert from "../../components/alert"
+import Select from "../../components/select"
 
 import { useDispatch, useSelector } from "react-redux"
 import { RootDispatch, RootState } from "../../config/store"
 import { getBeTest4, setDefaultBeTest4 } from './../../redux/beTest4'
 
-import Input from "../../components/input"
-import Alert from "../../components/alert"
 import { formatCurrency } from "../../config/helper"
 
 const BackendTest4 = () => {
   const [limit, setLimit] = useState({
-    value: '5',
-    isError: false,
-    errorMessage: ''
+    value: 5,
+    label: '5 year'
   })
   const [globalAlert, setGlobalAlert] = useState({
     show: false,
@@ -27,7 +26,7 @@ const BackendTest4 = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      if (limit?.value && !limit?.isError) getData()
+      getData()
     }, 500)
 
     return () => clearTimeout(delayDebounceFn)
@@ -55,7 +54,7 @@ const BackendTest4 = () => {
 
   const getData = () => {
     let params = {
-      limit: limit.value
+      limit: limit?.value
     }
     dispatch(getBeTest4(params))
   }
@@ -74,22 +73,22 @@ const BackendTest4 = () => {
           <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
             <div className="w-full laptop:w-1/3 flex flex-row gap-2">
-              <Input
-                value={limit?.value}
-                isError={limit?.isError}
-                errorMessage={limit?.errorMessage}
-                validate={{
-                  fields: {
-                    max: 1,
-                    regex: /^[1-9]*$/
-                  },
-                  customMessage: {
-                    max: 'Filter max 1 digit',
-                    regex: 'Only number 1 to 9'
-                  }
-                }}
-                onChange={(e) => setLimit(e)}
-                onClearText={(e: any) => setLimit(e)}
+              <Select
+                value={limit}
+                data={[
+                  { value: 1, label: '1 year' },
+                  { value: 2, label: '2 years' },
+                  { value: 3, label: '3 years' },
+                  { value: 4, label: '4 years' },
+                  { value: 5, label: '5 years' },
+                  { value: 6, label: '6 years' },
+                  { value: 7, label: '7 years' },
+                  { value: 8, label: '8 years' },
+                  { value: 9, label: '9 years' },
+                ]}
+                itemKey="value"
+                itemLabel="label"
+                onChange={(item) => setLimit(item)}
               />
             </div>
           </div>
