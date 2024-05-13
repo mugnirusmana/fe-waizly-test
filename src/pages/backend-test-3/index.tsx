@@ -126,7 +126,7 @@ const BackendTest3 = () => {
 
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
           <span className="font-bold">Reproduce:</span>
-          <span>SELECT & FROM employees WHERE department = <strong>Sales</strong> OR deparment = <strong>Marketing</strong></span>
+          <span>SELECT * FROM employees WHERE department = <strong>Sales</strong> OR deparment = <strong>Marketing</strong></span>
           <span className="text-[10px] italic border-t border-t-gray-400">Note: This result is cutomizing with dynamic department</span>
         </div>
 
