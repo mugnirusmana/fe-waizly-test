@@ -75,6 +75,17 @@ const BackendTest1 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show all employees data</span>
+        </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <span>SELECT * FROM employees</span>
+          <span className="text-[10px] italic border-t border-t-gray-400">Note: This result is cutomizing with paginate</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
@@ -87,11 +98,6 @@ const BackendTest1 = () => {
               />
             </div>
           </div>
-        </div>
-
-        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
-          <span className="font-bold">Info:</span>
-          <span>Show all employees data</span>
         </div>
 
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">

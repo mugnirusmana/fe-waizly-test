@@ -63,6 +63,28 @@ const BackendTest8 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show name and total salary from <strong>store precedure</strong> by input the departments <strong>{department}</strong></span>
+        </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <div className="w-full flex flex-col">
+            <span className="italic underline font-bold">Create store procedure</span>
+            <span>CREATE PROCEDURE GetEmployeeByDepartment(IN _dep_name TEXT)</span>
+            <span>BEGIN</span>
+            <span className="pl-5">SELECT name, salary FROM employees WHERE department = _dep_name COLLATE utf8mb4_unicode_ci;</span>
+            <span>END;</span>
+          </div>
+
+          <div className="w-full flex flex-col">
+            <span className="italic underline font-bold">Call store procedure</span>
+            <span>call GetEmployeeByDepartment(<strong>Sales</strong>)</span>
+          </div>
+          <span className="text-[10px] italic border-t border-t-gray-400">Note: This result is cutomizing with dynamic deparment</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
@@ -78,11 +100,6 @@ const BackendTest8 = () => {
               />
             </div>
           </div>
-        </div>
-
-        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
-          <span className="font-bold">Info:</span>
-          <span>Show name and total salary from <strong>store precedure</strong> by input the departments <strong>{department}</strong></span>
         </div>
 
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">

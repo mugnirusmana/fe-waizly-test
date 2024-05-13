@@ -64,6 +64,11 @@ const BackendTest6 = () => {
           <span>Show name, salary and average salary of all employees</span>
         </div>
 
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <span>SELECT  name, salary, (SELECT @average := AVG(salary) FROM employees) AS average FROM employees WHERE salary {`>`} @average</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 gap-2">
           <Table
             titles={[

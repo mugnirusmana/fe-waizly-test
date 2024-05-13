@@ -69,6 +69,17 @@ const BackendTest4 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Sum average salary for every who was join who joined in the last <strong>{limit?.value}</strong> year{limit?.value > 1 ? 's' :''}</span>
+        </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <span>SELECT AVG(salary) FROM employees WHERE YEAR(created_at) {`>`}= YEAR(curdate()) - <strong>5</strong></span>
+          <span className="text-[10px] italic border-t border-t-gray-400">Note: This result is cutomizing with dynamic years</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
@@ -92,11 +103,6 @@ const BackendTest4 = () => {
               />
             </div>
           </div>
-        </div>
-
-        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
-          <span className="font-bold">Info:</span>
-          <span>Sum average salary for every who was join who joined in the last <strong>{limit?.value}</strong> year{limit?.value > 1 ? 's' :''}</span>
         </div>
 
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">

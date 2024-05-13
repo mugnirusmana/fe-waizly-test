@@ -48,6 +48,11 @@ const BackendTest7 = () => {
           <span>Show name and total sales with rank for every employees and sort by total sales, the top is the highest</span>
         </div>
 
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <span>SELECT ROW_NUMBER() OVER () as rank_number, employees.name as name, SUM(sales.amount) as amount FROM employees JOIN sales ON employees.id = sales.employee_id GROUP BY name ORDER BY amount DESC</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5 gap-2">
           <Table
             titles={[

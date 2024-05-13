@@ -119,6 +119,17 @@ const BackendTest3 = () => {
         ]}
       />
       <div className="w-full h-fit px-5 flex flex-col gap-5">
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
+          <span className="font-bold">Info:</span>
+          <span>Show employees by department{departments?.length > 1 ? 's' : ''} <strong>({departments?.join(', ')})</strong></span>
+        </div>
+
+        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs gap-5">
+          <span className="font-bold">Reproduce:</span>
+          <span>SELECT & FROM employees WHERE department = <strong>Sales</strong> OR deparment = <strong>Marketing</strong></span>
+          <span className="text-[10px] italic border-t border-t-gray-400">Note: This result is cutomizing with dynamic department</span>
+        </div>
+
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
           <div className="w-full flex flex-col">
             <span className="w-fit flex font-bold">Filter</span>
@@ -126,11 +137,6 @@ const BackendTest3 = () => {
               {renderFilter()}
             </div>
           </div>
-        </div>
-
-        <div className="w-full h-fit rounded bg-white flex flex-col p-5 text-xs">
-          <span className="font-bold">Info:</span>
-          <span>Show employees by department{departments?.length > 1 ? 's' : ''} <strong>({departments?.join(', ')})</strong></span>
         </div>
 
         <div className="w-full h-fit rounded bg-white flex flex-col p-5">
