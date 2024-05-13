@@ -113,7 +113,7 @@ const Register = () => {
       <img src={ImgLanscape} alt="bg" className="w-full h-full object-cover absolute top-0 left-0" />
       <div className="w-full h-full bg-black opacity-50 absolute top-0 left-0" />
       
-      <div className={`w-full tablet:w-1/3 h-fit backdrop-blur border border-white rounded flex flex-col items-center p-10 gap-5 drop-shadow-lg shadow-lg duration-100 ${showForm}`}>
+      <div className={`w-full tablet:w-1/3 h-fit backdrop-blur-lg border border-white rounded flex flex-col items-center p-10 gap-5 drop-shadow-lg shadow-lg duration-100 ${showForm}`}>
         <span className="w-full flex items-center justify-center font-bold text-2xl pb-5">Register</span>
 
         <Input

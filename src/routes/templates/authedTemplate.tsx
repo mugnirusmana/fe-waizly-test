@@ -292,12 +292,6 @@ const Dashboard = ({ children }: Props) => {
             />
             <div className={`w-[80px] h-fit bg-white border border-gray-200 duration-300 absolute top-8 shadow-lg ${showSetting ? 'right-0' : '-right-28'} rounded flex flex-col gap-2 p-2`}>
               <span
-                className="cursor-pointer hover:underline"
-                onClick={() => {
-                  setShowSetting(false)
-                }}
-              >Profile</span>
-              <span
                 className={`${auth?.isLoading ? 'cursor-default' : 'cursor-pointer'} hover:underline`}
                 onClick={() => !auth?.isLoading ? dispatch(logOut()) : {}}
               >{auth?.isLoading ? 'Loading...' : 'Logout'}</span>
