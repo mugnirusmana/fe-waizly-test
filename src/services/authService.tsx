@@ -13,7 +13,10 @@ export const login = (params: any | loginType) => {
   formData.append('is_forever', params?.is_forever)
   return fetch(`${ENV.API}/login`, {
     method: 'post',
-    body: formData
+    body: formData,
+    headers: {
+      "ngrok-skip-browser-warning": "69420"
+    }
   }).then((res) => res.json())
 }
 
@@ -26,6 +29,9 @@ export const register = (params: any | loginType) => {
   formData.append('is_forever', params?.is_forever??false)
   return fetch(`${ENV.API}/register`, {
     method: 'post',
-    body: formData
+    body: formData,
+    headers: {
+      "ngrok-skip-browser-warning": "69420"
+    }
   }).then((res) => res.json())
 }
