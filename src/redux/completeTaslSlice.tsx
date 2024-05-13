@@ -68,7 +68,7 @@ export const setComplete = (params: any) => {
     dispatch(reducerCompleteTask())
     TASK.complete(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerCompleteTaskSuccess())
         } else {
           dispatch(reducerCompleteTaskFailed(setErrorAxios(response)))

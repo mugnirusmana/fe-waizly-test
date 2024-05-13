@@ -68,7 +68,7 @@ export const setSort = (params: any) => {
     dispatch(reducerSortTask())
     TASK.sort(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerSortTaskSuccess())
         } else {
           dispatch(reducerSortTaskFailed(setErrorAxios(response)))

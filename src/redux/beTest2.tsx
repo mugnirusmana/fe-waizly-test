@@ -77,7 +77,7 @@ export const getBeTest2 = (params: ParamsListProps) => {
     dispatch(reducerBeTest2())
     TESTBE.test2(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerBeTest2Success(setSuccessAxios(response)))
         } else {
           dispatch(reducerBeTest2Failed(setErrorAxios(response)))

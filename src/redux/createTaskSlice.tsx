@@ -68,7 +68,7 @@ export const setCreate = (params: any) => {
     dispatch(reducerCreateTask())
     TASK.add(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerCreateTaskSuccess())
         } else {
           dispatch(reducerCreateTaskFailed(setErrorAxios(response)))

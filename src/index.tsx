@@ -9,6 +9,9 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import { persistStore } from "redux-persist"
 
+import axios from "axios"
+import { forceLogout } from "./redux/authSlice"
+
 let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(
@@ -23,6 +26,17 @@ root.render(
       </PersistGate>
     </Provider>
   </React.StrictMode>
+)
+
+const UNAUTHORIZED = 401
+const { dispatch } = store
+axios.interceptors.response.use(
+  response => response,
+  (error) => {
+    const {status, data} = error.response
+    if (status === UNAUTHORIZED) dispatch(forceLogout(data?.meta?.message))
+    return Promise.reject(error)
+  }
 )
 
 // If you want to start measuring performance in your app, pass a function

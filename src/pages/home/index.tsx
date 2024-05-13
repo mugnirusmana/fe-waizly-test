@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import { ImgLanscape } from "./../../assets"
 
 import Button from "./../../components/auth/button"
+import ENV from "../../config/base-env"
 
 const Home = () => {
     const navigate = useNavigate()
@@ -24,6 +25,11 @@ const Home = () => {
                     <div className="w-full flex flex-col items-center justify-center pb-5">
                         <span className="w-full flex items-center justify-center text-xl  text-center">FRONTEND TECHNICAL TEST</span>
                         <span className="w-full flex items-center justify-center text-xl  text-center font-bold">WAIZLY</span>
+                    </div>
+
+                    <div className="w-full flex flex-col items-center text-xs">
+                        <span>Current Server</span>
+                        <span>{ENV.BASE_URL}</span>
                     </div>
                     
                     <div className="w-full flex flex-col laptop:flex-row gap-2 p-5">
@@ -69,7 +75,7 @@ const Home = () => {
                     </div>
 
                     <Button
-                        label={"Use this server & login"}
+                        label={"Login"}
                         onClick={() => navigate('/login')}
                     />
                 </div>

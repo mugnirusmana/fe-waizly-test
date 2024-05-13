@@ -1,12 +1,12 @@
 export const setErrorAxios = (error: any) => {
   return {
     message: error?.meta?.message??'Oops something went wrong',
-    errorMeta: error?.data??{}
+    errorMeta: error?.data?.data??{}
   }
 }
 
 export const setSuccessAxios = (response: any) => {
-  return response?.data
+  return response?.data?.data
 }
 
 export const getWindowDimensions = () => {

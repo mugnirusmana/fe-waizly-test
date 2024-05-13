@@ -3,14 +3,15 @@ import { AUTH } from "./../services"
 import { setSuccessAxios, setErrorAxios } from "./../config/helper"
 
 interface Props {
-    data: {
+    data?: {
       [key: string]: any
     }
-    isLoading: boolean
-    isError: boolean
-    isSuccess: boolean
+    isLoading?: boolean
+    isError?: boolean
+    isSuccess?: boolean
     errorMessage?: string | null,
-    errorMeta: any
+    errorMeta?: any,
+    isForceLogout?: boolean
 }
 
 interface ParamsSignInProps {
@@ -25,7 +26,8 @@ const initialState: Props = {
   isError: false,
   isSuccess: false,
   errorMessage: null,
-  errorMeta: {}
+  errorMeta: {},
+  isForceLogout: false,
 }
 
 export const authSlice = createSlice({
@@ -44,6 +46,7 @@ export const authSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
+      state.isForceLogout = false
     },
     reducerLogin: (state: Props) => {
       state.isLoading = true
@@ -65,19 +68,35 @@ export const authSlice = createSlice({
       state.isError = true
       state.errorMessage = payload?.payload?.message
       state.errorMeta = payload?.payload?.errorMeta
+    },
+    reducerForceLogout: (state: Props, payload) => {
+      state.isLoading = false
+      state.isSuccess = false
+      state.isError = true
+      state.isForceLogout = true
+      state.data = {}
+      state.errorMessage = payload?.payload
     }
   }
 })
 
-export const { reducerRemoveToken, reducerLoginDefault, reducerLogin, reducerLoginSuccess, reducerLoginFailed } = authSlice.actions
+export const {
+  reducerRemoveToken,
+  reducerLoginDefault,
+  reducerLogin,
+  reducerLoginSuccess,
+  reducerLoginFailed,
+  reducerForceLogout
+} = authSlice.actions
 
 export const signIn = (params: ParamsSignInProps) => {
+
   return async (dispatch: Dispatch) => {
     dispatch(reducerLogin())
     AUTH.login(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
-          localStorage.setItem('token', response?.data?.access_token)
+        if (response?.data?.meta?.is_success) {
+          localStorage.setItem('token', response?.data?.data?.access_token)
           dispatch(reducerLoginSuccess(setSuccessAxios(response)))
         } else {
           dispatch(reducerLoginFailed(setErrorAxios(response)))
@@ -99,6 +118,12 @@ export const logOut = () => {
     setTimeout(() => {
       dispatch(reducerRemoveToken())
     }, 1500)
+  }
+}
+
+export const forceLogout = (data: any) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(reducerForceLogout(data))
   }
 }
 

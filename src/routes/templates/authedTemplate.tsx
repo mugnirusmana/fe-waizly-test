@@ -6,6 +6,7 @@ import { FaCaretRight } from "@react-icons/all-files/fa/FaCaretRight"
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase"
 import { FaAngleRight } from "@react-icons/all-files/fa/FaAngleRight"
 import { FaFile } from "@react-icons/all-files/fa/FaFile"
+import { FaGlobe } from "@react-icons/all-files/fa/FaGlobe"
 
 import { useDispatch, useSelector } from "react-redux"
 import { RootState, RootDispatch } from "../../config/store"
@@ -17,7 +18,7 @@ interface Props {
   children: ReactNode
 }
 
-const Dashboard = ({ children }: Props) => {
+const AuthedTemplate = ({ children }: Props) => {
   const navigate = useNavigate()
   const { auth } = useSelector((state: RootState) => state)
   const dispatch = useDispatch<RootDispatch>()
@@ -56,7 +57,7 @@ const Dashboard = ({ children }: Props) => {
     },
     {
       title: 'Backend 2',
-      icon: <FaFile />,
+      icon: <FaDatabase />,
       active: false,
       showChildrens: false,
       childrens: [
@@ -104,7 +105,7 @@ const Dashboard = ({ children }: Props) => {
     },
     {
       title: 'Frontend 1',
-      icon: <FaDatabase />,
+      icon: <FaGlobe />,
       route: '/frontend-test-1',
       active: false,
     }
@@ -305,4 +306,4 @@ const Dashboard = ({ children }: Props) => {
   )
 }
 
-export default Dashboard
+export default AuthedTemplate

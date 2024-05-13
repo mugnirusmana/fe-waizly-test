@@ -53,6 +53,7 @@ const Login = () => {
 			isLoading,
 			isError,
 			errorMessage,
+			isForceLogout,
 			errorMeta
 		} = auth
 
@@ -61,22 +62,31 @@ const Login = () => {
 		}
 
 		if (!isLoading && isError) {
-			setAlertGlobal({
-				title: 'Sign In',
-				message: errorMessage??'',
-				show: true
-			})
-			setUsername({
-				...username,
-				isError: errorMeta?.error?.username? true : false,
-				errorMessage: errorMeta?.error?.username??''
-			})
-			setPassword({
-				...password,
-				isError: errorMeta?.error?.password? true : false,
-				errorMessage: errorMeta?.error?.password??''
-			})
-			dispatch(defaultSignIn())
+			if (!isForceLogout) {
+				setAlertGlobal({
+					title: 'Sign In',
+					message: errorMessage??'',
+					show: true
+				})
+				setUsername({
+					...username,
+					isError: errorMeta?.error?.username? true : false,
+					errorMessage: errorMeta?.error?.username??''
+				})
+				setPassword({
+					...password,
+					isError: errorMeta?.error?.password? true : false,
+					errorMessage: errorMeta?.error?.password??''
+				})
+				dispatch(defaultSignIn())
+			} else {
+				setAlertGlobal({
+					title: 'Authorization',
+					message: errorMessage??'',
+					show: true
+				})
+				dispatch(defaultSignIn())
+			}
 		}
 	}, [auth])
 

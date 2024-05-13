@@ -76,7 +76,7 @@ export const getTodo = (params: ParamsListTodoProps) => {
     dispatch(reducerListTodo())
     TASK.getList(params)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerListTodoSuccess(setSuccessAxios(response)))
         } else {
           dispatch(reducerListTodoFailed(setErrorAxios(response)))

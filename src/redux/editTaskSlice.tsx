@@ -68,7 +68,7 @@ export const setEdit = (params: any, id: any) => {
     dispatch(reducerEditTask())
     TASK.edit(params, id)
       .then((response) => {
-        if (response?.meta?.is_success) {
+        if (response?.data?.meta?.is_success) {
           dispatch(reducerEditTaskSuccess())
         } else {
           dispatch(reducerEditTaskFailed(setErrorAxios(response)))
