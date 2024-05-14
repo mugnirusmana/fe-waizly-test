@@ -1,6 +1,6 @@
 export const setErrorAxios = (error: any) => {
   return {
-    message: error?.meta?.message??'Oops something went wrong',
+    message: error?.data?.meta?.message??'Oops something went wrong',
     errorMeta: error?.data?.data??{}
   }
 }
@@ -20,11 +20,12 @@ export const getWindowDimensions = () => {
 interface formatCurrencyOptionType {
   locale?: string
   currency?: string
+  maximumFractionDigits?: number
 }
 export const formatCurrency = (value: number, options?: formatCurrencyOptionType) => {
-  return new Intl.NumberFormat(options?.locale??"id-ID", {
+  return new Intl.NumberFormat(options?.locale ?? "id-ID", {
     style: "currency",
-    currency: options?.currency??"IDR",
-    maximumFractionDigits: 0
+    currency: options?.currency ?? "IDR",
+    maximumFractionDigits: options?.maximumFractionDigits ?? 0
   }).format(value)
 }

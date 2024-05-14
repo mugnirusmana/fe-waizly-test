@@ -99,7 +99,7 @@ const Input = ({
     if (value) {
       return (
         <div
-          className={`w-[15px] mr-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} cursor-pointer`}
+          className={`w-[15px] mx-2 h-full flex flex-row items-center justify-center duration-300 ${isError ? 'text-red-300' : 'text-white'} cursor-pointer`}
           onClick={() => onClearText ? setValidate("") : {}}
         ><IoClose /></div>
       )
